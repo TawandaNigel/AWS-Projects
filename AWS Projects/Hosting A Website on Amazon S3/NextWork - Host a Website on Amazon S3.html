@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+     
+    <title>NextWork - Host a Website on Amazon S3</title>
+    <meta content="Let&#39;s host your very own website on Amazon S3!" name="description" />
+    <meta
+      content="NextWork - Host a Website on Amazon S3"
+      property="og:title"
+    />
+    <meta
+      content="Let&#39;s host your very own website on Amazon S3!"
+      property="og:description"
+    />
+    <meta
+      content="NextWork - Host a Website on Amazon S3"
+      property="twitter:title"
+    />
+    <meta
+      content="Let&#39;s host your very own website on Amazon S3!"
+      property="twitter:description"
+    />
+    
+    <meta content="/static/og-project.png" property="og:image" />
+    <meta content="/static/og-project.png" property="twitter:image" />
+    
+    <meta property="og:type" content="website" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    
+    <link rel="canonical" href="https://learn.nextwork.org/projects/aws-host-a-website-on-s3?track=high" />
+     
+    <meta content="https://learn.nextwork.org/projects/aws-host-a-website-on-s3?track=high" property="og:url" />
+    
+    <meta content="NextWork" property="og:site_name" />
+    <meta property="og:locale" content="en_US" />
+
+    
+    
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"LearningResource","about":"\u003ca target=\"_blank\" href=\"https://aws.amazon.com/s3/\"\u003eAmazon S3\u003c/a\u003e","description":"Let's host your very own website on Amazon S3!","educationalLevel":"Easy peasy","estimatedCost":"$0","inLanguage":"en-US","learningResourceType":["Tutorial","Hands-on Project"],"name":"Host a Website on Amazon S3","provider":{"@type":"Organization","name":"NextWork"},"teaches":"Let's host your very own website on Amazon S3!","timeRequired":"PT45M","tool":["\u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-account-setup?utm_source=project-app\\\"\u003eSet Up An AWS Account for Free\u003c/a\u003e\u003c/u\u003e"],"url":"https://learn.nextwork.org/projects/aws-host-a-website-on-s3?track=high"}
+    </script>
+    
+
+    <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+    <link rel="icon" href="/static/favicon.svg?v=2" type="image/svg+xml" />
+
+    
+    <link
+      rel="preload"
+      href="/static/fonts/fk-grotesk-neue/woff2/FKGroteskNeue-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/fk-grotesk-neue/woff2/FKGroteskNeue-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/suisse-neue/woff2/SuisseNeue-Regular-WebS.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/suisse-neue/woff2/SuisseNeue-Medium-WebS.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    
+	<link rel="stylesheet" href="/static/assets/entry-47669cd6.css">
+	<script type="module" src="/static/assets/entry-8cf81344.js"></script>
+	<link rel="modulepreload" href="/static/assets/entry-8cf81344.js"><link rel="modulepreload" href="/static/assets/chunk-bd50b88a.js"><link rel="modulepreload" href="/static/assets/document_components-b35a0cd8.js">
+
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overscroll-behavior: none;
+        background-color: #f8f5f1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script id="nw-bootstrap">
+      window.__PRELOADED_STATE__ = "eyJ1c2VyIjp7ImVtYWlsIjoibmlnZWwuY2hpdGFwaUBnbWFpbC5jb20iLCJleHAiOjE3NjQ3MTA3MDAsImlkIjoic3dBeUxWQmd0QW9EOHZlNzRyS2EiLCJuYW1lIjoiVGF3YW5kYSBOaWdlbCBDaGl0YXBpIiwibmlja25hbWUiOiJoZWFydGZlbHRfY3lhbl9nbGFtb3JvdXNfbWVkbGFyIiwicGljdHVyZSI6Ii9oZWFydGZlbHRfY3lhbl9nbGFtb3JvdXNfbWVkbGFyL3VwbG9hZHMvcHJvZmlsZV9waWN0dXJlX2U2Zjg3ZTAwLTQ4NDgtNDk2NC1hYTYzLWQwYTJlNWFhMzI3YyIsInBsYW4iOiJmcmVlIiwidmFuaXR5U2x1ZyI6ImJ1aWxkLWEtdmlydHVhbC1wcml2YXRlLW5ldHdvcmsifSwicHJlZmVyZW5jZXMiOnsiY3VycmVudFByb2plY3QiOiJhd3MtaG9zdC1hLXdlYnNpdGUtb24tczMiLCJkYXlzUGVyV2VlayI6NSwiZG9jdW1lbnRhdGlvblRoZW1lIjoibGlnaHQiLCJob3Vyc1BlckRheSI6MSwic2VsZWN0ZWRDYXRlZ29yaWVzIjpudWxsfSwiZmVhdHVyZXMiOnsiYXBwLmFwcF92ZXJzaW9uX3JlbG9hZGluZyI6dHJ1ZSwiYXBwLm1hbmFnZV9zdWJzY3JpcHRpb25fcG9ydGFsIjp0cnVlLCJhcHAucG9ydGZvbGlvIjp0cnVlLCJhcHAucmVuZGVyX3JlYWN0X3NoZWxsIjp0cnVlLCJnZW5lcmFsLnByb2QiOnRydWUsInByb2plY3RzLmNoYXRfdG9vbGJhciI6dHJ1ZSwicHJvamVjdHMuY291cnNlX3RyYWNrIjp0cnVlLCJwcm9qZWN0cy5jdXN0b21fbG9naW4iOnRydWUsInByb2plY3RzLmVkaXRvciI6dHJ1ZSwicHJvamVjdHMuaGlnaGxpZ2h0cyI6dHJ1ZSwicHJvamVjdHMubGl2ZV9kb2NzX2RyYXciOnRydWUsInByb2plY3RzLmxvZ2luIjp0cnVlLCJwcm9qZWN0cy5uYXZWMiI6dHJ1ZSwicHJvamVjdHMucGF5bWVudHMiOnRydWUsInByb2plY3RzLnBkZl9kb3dubG9hZGluZyI6dHJ1ZSwicHJvamVjdHMucHJvamVjdF9pbl9wcm9ncmVzc19zdGF0dXMiOnRydWUsInByb2plY3RzLnNoYXJpbmdWMiI6dHJ1ZSwicHJvamVjdHMuc2ltcGxpZnkiOnRydWV9LCJhcHBTZXR0aW5ncyI6eyJhcHBWZXJzaW9uIjoiMS4wLjEifSwibGltaXRzIjp7InBvcnRmb2xpb0RvY3VtZW50Ijp7ImxpbWl0Ijp7ImZyZWUiOjMsInBybyI6MTAwMDAwMH19LCJxdWl6Q29tcGxldGlvbiI6eyJjdXJyZW50IjozLCJsaW1pdCI6eyJmcmVlIjo1LCJwcm8iOjEwMDAwMDB9fSwidmFsaWRhdGlvblRleHRDaGFyYWN0ZXIiOnsibGltaXQiOnsiZnJlZSI6MjUwLCJwcm8iOjEwMDB9fX0sInByb2plY3QiOnsiY29tcGxldGVkQnkiOlsiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUNMa3pSd0Q1RGhXZDFhNHlXZGc3bkY2bU84azItb2ItNV9RWFhQbEVXQkYtdVc0WlI9czk2LWMiLCJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NKMFdiV090bzNrR01NdEdWckRpdGhiRU1uMDFuelFnYVlHRVAzbUgyTnVDSloyZjlwel9nPXM5Ni1jIiwiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjAxQkQ5dTNvZzhBdGptV2FETW91Q1ZtSGs0SU0tQW9fU0plT0RIbHgtY29vQVExc1FVUT1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0pVdjExZEpGaURGOHRvTzVncmswRUprRFB0N2NyNDNvUm0wTFpsbTB2XzVobzBKdDA9czk2LWMiLCJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLQ0R1WGxPOVhvel9fdFBRYzlZR1FPbEpobTdJSmxhZ2FWWFpxYkhFeTRRWEZfMmc9czk2LWMiLCJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NKS01WeXU5Y2xoaDNpQlN3UlgwX0QzNnBWTk92RnR4RGhqODFEdzhXaE1Xb1pWQm1NPXM5Ni1jIiwiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVZ4MzQtQmQ0WTFJWUNzaGJva1hjX0hIMVB4c1BFY0JKMDBhVU1Jdm10emM2Ums5dlU9czk2LWMiLCJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NJTVJFSnM3TTRtdlpJdmo0MXR5ZGs5VEZzdVRxSEVFdG5vY2hlU0VCYU9lclptV1E9czk2LWMiLCJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLWmdsLVVPU3hSOEJNTGd2Sk1aU2xSNE9FVmpOd3hHei1kbmh1ZWx1RThOVVBrOGViRT1zOTYtYyIsImh0dHBzOi8vcy5ncmF2YXRhci5jb20vYXZhdGFyLzJkYmFiYmRjYjA1ZjBhMjkyYzU3MGQzMDhmYWZmYTJkP3M9NDgwXHUwMDI2cj1wZ1x1MDAyNmQ9aHR0cHMlM0ElMkYlMkZjZG4uYXV0aDAuY29tJTJGYXZhdGFycyUyRm1vLnBuZyJdLCJjb21wbGV0aW9ucyI6Mzk5NywiZG9jU3RhdHVzIjoiQ1JFQVRFRCIsImhhc1VwZGF0ZXMiOmZhbHNlLCJpZCI6ImF3cy1ob3N0LWEtd2Vic2l0ZS1vbi1zMyIsImxvY2tlZCI6dHJ1ZSwibWV0YWRhdGEiOnsiY2F0ZWdvcnkiOiJDbG91ZCBCZWdpbm5lciBDaGFsbGVuZ2UiLCJjb25jZXB0cyI6WyJcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL2F3cy5hbWF6b24uY29tL3MzL1wiXHUwMDNlQW1hem9uIFMzXHUwMDNjL2FcdTAwM2UiXSwiY29zdCI6IiQwIiwiZGVzY3JpcHRpb24iOiJMZXQncyBob3N0IHlvdXIgdmVyeSBvd24gd2Vic2l0ZSBvbiBBbWF6b24gUzMhIiwiZGlmZmljdWx0eSI6IkVhc3kgcGVhc3kiLCJmYWNlYm9va3RlbXBsYXRlIjoiSSd2ZSBiZWVuIGxlYXJuaW5nIGFib3V0IGNsb3VkIGRlcGxveW1lbnQgb24gQVdTIGxhdGVseSwgYW5kIEknbSBzbyBleGNpdGVkIHRvIHNoYXJlIHNvbWV0aGluZyBJIGp1c3QgYnVpbHQhXG5cbkkgcHV0IHRvZ2V0aGVyIGEgcHJvamVjdCB3aGVyZSBJIGhvc3RlZCBteSBvd24gc3RhdGljIHdlYnNpdGUgb24gQW1hem9uIFMzLiBUaGUgY29vbGVzdCBwYXJ0IHdhcyBkZWZpbml0ZWx5IHRhY2tsaW5nIHRoZSBwdWJsaWMgYWNjZXNzIHNldHRpbmdzIGFuZCBmaXhpbmcgYW4gaW50ZXJlc3RpbmcgY2hhbGxlbmdlIHRvIGdldCB0aGUgd2Vic2l0ZSB2aXNpYmxlIG9ubGluZS5cblxuQ2hlY2sgb3V0IG15IHdvcmsgYXQgTmV4dFdvcms6XG4jYXdzY2xvdWQgI2FtYXpvbnMzICNBV1NCZWdpbm5lcnMiLCJpY29uIjoiL3Byb2plY3RzL3N0YXRpYy8xL2ljb24zLnBuZyIsImluc3RhZ3JhbXRlbXBsYXRlIjoiRGF5IDEgb2YgdGhlIEFXUyBQcm9qZWN0cyBDaGFsbGVuZ2UgaXMgYSB3cmFwIVxuSSBidWlsdCBhIHN0YXRpYyB3ZWJzaXRlIGFuZCBob3N0ZWQgaXQgb24gQW1hem9uIFMzLlxuXG5NeSBmYXZvcml0ZSBwYXJ0cyB3ZXJlOlxuXG4tIENyZWF0aW5nIGFuZCBjb25maWd1cmluZyBhbiBBbWF6b24gUzMgYnVja2V0LCBjb21wbGV0ZSB3aXRoIHRoZSByaWdodCBhY2Nlc3Mgc2V0dGluZ3MuXG4tIFVwbG9hZGluZyB0aGUgd2Vic2l0ZSBjb250ZW50IGFuZCBkaXZpbmcgZGVlcCBpbnRvIGhvdyBzdGF0aWMgaG9zdGluZyB3b3Jrcy5cbi0gRml4aW5nIGFuIGludGVyZXN0aW5nIGNoYWxsZW5nZSB3aXRoIHRoZSB3ZWJzaXRlJ3MgcHVibGljIHZpc2liaWxpdHkuXG5cbkl0IHdhcyBhIGdyZWF0IHdheSB0byBsZWFybiB0aGUgZnVuZGFtZW50YWxzIG9mIFMzLiBXaGF0IHByb2plY3RzIGFyZSB5b3Ugd29ya2luZyBvbj9cblxuVGhhbmtzIEBpdHNuZXh0d29yayBmb3IgdGhlIHByb2plY3QgaWRlYSFcblxuQ2hlY2sgb3V0IG15IGRvY3VtZW50YXRpb24gdG8gc2VlIGhvdyBJIGJ1aWx0IGl0OlxuXG4uIC4gLlxuI2F3c2Nsb3VkICNhbWF6b25zMyAjQVdTQmVnaW5uZXJzQ2hhbGxlbmdlICNOZXh0V29yayIsIm5lZWRzIjpbIlx1MDAzY3VcdTAwM2VcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL2xlYXJuLm5leHR3b3JrLm9yZy9wcm9qZWN0cy9hd3MtYWNjb3VudC1zZXR1cD91dG1fc291cmNlPXByb2plY3QtYXBwXFxcIlx1MDAzZVNldCBVcCBBbiBBV1MgQWNjb3VudCBmb3IgRnJlZVx1MDAzYy9hXHUwMDNlXHUwMDNjL3VcdTAwM2UiXSwicGFydCI6MiwicGxhbiI6ImZyZWUiLCJzaGFyZXRlbXBsYXRlIjoiVGhhdCdzIERheSAjMSBvZiBteSBBV1MgUHJvamVjdHMgQ2hhbGxlbmdlIGRvbmUhXG5Ub2RheSBJIGhvc3RlZCBteSB2ZXJ5IG93biBzdGF0aWMgd2Vic2l0ZSBvbiBBbWF6b24gUzM6XG7inIUgQ3JlYXRlZCBhbmQgY29uZmlndXJlZCBhbiBBbWF6b24gUzMgYnVja2V0LCBjb21wbGV0ZSB3aXRoIEFDTHMsIHZlcnNpb25pbmcsIGFuZCBwdWJsaWMgYWNjZXNzLlxu4pyFIFVwbG9hZGVkIHdlYnNpdGUgY29udGVudCwgZGl2aW5nIGRlZXAgaW50byBob3cgc3RhdGljIHdlYnNpdGVzIGZ1bmN0aW9uIGFuZCBob3cgdG8gaG9zdCB0aGVtIG9uIFMzLlxu4pyFIFRhY2tsZWQgcHVibGljIGFjY2VzcyBzZXR0aW5ncyBhbmQgZml4ZWQgYW4gaW50ZXJlc3RpbmcgY2hhbGxlbmdlIHdpdGggdGhlIHdlYnNpdGUncyB2aXNpYmlsaXR5LlxuXG7wn5O4IFNlZSBteSBqb3VybmV5IGZyb20gY3JlYXRpbmcgYnVja2V0cyB0byBkZXBsb3lpbmcgYSBmdWxseSBmdW5jdGlvbmFsIHN0YXRpYyB3ZWJzaXRlIGluIG15IGRvY3VtZW50YXRpb24gYmVsb3cuXG5cbvCfk6IgU2hvdXRvdXQgdG8gYWxsIEFXUyBsZWFybmVycyAtIGxldCdzIGNvbm5lY3QsIHNoYXJlIHRpcHMsIGFuZCBrZWVwIGltcHJvdmluZyFcblxu8J+ZjyBCaWcgdGhhbmtzIHRvIEBOZXh0V29yayBmb3Igc2V0dGluZyB1cCB0aGlzIGVuZ2FnaW5nIGNoYWxsZW5nZS4gUmVhZHkgZm9yIHRoZSBuZXh0IG9uZSFcbiNhd3NjbG91ZCAjYW1hem9uczMgI0FXU0JlZ2lubmVyc0NoYWxsZW5nZSAjTmV4dFdvcmsiLCJ0aW1lIjoiNDUgbWluIiwidGl0bGUiOiJIb3N0IGEgV2Vic2l0ZSBvbiBBbWF6b24gUzMiLCJ0cmFja3MiOlt7ImRlc2NyaXB0aW9uIjoiWW91J3JlIG9uIHlvdXIgb3duISBHcmVhdCBmb3IgdGhvc2Ugd2hvIHdhbnQgdG8gZGl2ZSBpbiBoZWFkZmlyc3QuIiwiaWQiOiJubyIsInRpdGxlIjoiT24gWW91ciBPd24ifSx7ImRlc2NyaXB0aW9uIjoiTGVhdmVzIG1vc3Qgb2YgaXQgdXAgdG8geW91LiBHcmVhdCBmb3IgdGhvc2UgbG9va2luZyBmb3IgYSBjaGFsbGVuZ2UuIiwiaWQiOiJsb3ciLCJ0aXRsZSI6IlNvbWUgR3VpZGFuY2UifSx7ImRlc2NyaXB0aW9uIjoiR2l2ZXMgc3RlcC1ieS1zdGVwIGluc3RydWN0aW9ucyBmb3IgZXZlcnkgcGFydC4gR3JlYXQgZm9yIGJlZ2lubmVycyEiLCJpZCI6ImhpZ2giLCJ0aXRsZSI6IlN0ZXAtYnktU3RlcCBHdWlkYW5jZSJ9XSwidHdpdHRlcnRlbXBsYXRlIjoiSnVzdCBjb21wbGV0ZWQgYSBuZXcgcHJvamVjdCEgSSBidWlsdCBhIHN0YXRpYyB3ZWJzaXRlLlxuXG5JdCB3YXMgYSBncmVhdCBleHBlcmllbmNlLiBIZXJl4oCZcyBhIHF1aWNrIGxvb2sgYXQgaG93IEkgZGlkIGl0OlxuXG4tIENyZWF0ZWQgYW5kIGNvbmZpZ3VyZWQgYW4gQW1hem9uIFMzIGJ1Y2tldFxuLSBVcGxvYWRlZCB3ZWJzaXRlIGNvbnRlbnRcbi0gVGFja2xlZCBwdWJsaWMgYWNjZXNzIHNldHRpbmdzXG5cbvCfkYcgQ2hlY2sgb3V0IG15IHN0ZXAtYnktc3RlcCBwcm9jZXNzIGhlcmU6XG4jYXdzY2xvdWQgI2FtYXpvbnMzICNBV1NCZWdpbm5lcnNDaGFsbGVuZ2UiLCJ2aXNpYmlsaXR5IjoicHVibGljIn0sInByb2dyZXNzIjoxMDAsInN0YXR1cyI6IkNPTVBMRVRFIiwidmFyaWFibGVzIjpbeyJuYW1lIjoiWU9VUk5BTUUifV19fQ==";
+      window.project = "{\"completedBy\":[\"https://lh3.googleusercontent.com/a/ACg8ocICLkzRwD5DhWd1a4yWdg7nF6mO8k2-ob-5_QXXPlEWBF-uW4ZR=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocJ0WbWOto3kGMMtGVrDithbEMn01nzQgaYGEP3mH2NuCJZ2f9pz_g=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocJ01BD9u3og8AtjmWaDMouCVmHk4IM-Ao_SJeODHlx-cooAQ1sQUQ=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocJUv11dJFiDF8toO5grk0EJkDPt7cr43oRm0LZlm0v_5ho0Jt0=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocKCDuXlO9Xoz__tPQc9YGQOlJhm7IJlagaVXZqbHEy4QXF_2g=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocJKMVyu9clhh3iBSwRX0_D36pVNOvFtxDhj81Dw8WhMWoZVBmM=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocIVx34-Bd4Y1IYCshbokXc_HH1PxsPEcBJ00aUMIvmtzc6Rk9vU=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocIMREJs7M4mvZIvj41tydk9TFsuTqHEEtnocheSEBaOerZmWQ=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocKZgl-UOSxR8BMLgvJMZSlR4OEVjNwxGz-dnhueluE8NUPk8ebE=s96-c\",\"https://s.gravatar.com/avatar/2dbabbdcb05f0a292c570d308faffa2d?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fmo.png\"],\"completions\":3997,\"docStatus\":\"CREATED\",\"hasUpdates\":false,\"id\":\"aws-host-a-website-on-s3\",\"locked\":true,\"metadata\":{\"category\":\"Cloud Beginner Challenge\",\"concepts\":[\"\\u003ca target=\\\"_blank\\\" href=\\\"https://aws.amazon.com/s3/\\\"\\u003eAmazon S3\\u003c/a\\u003e\"],\"cost\":\"$0\",\"description\":\"Let's host your very own website on Amazon S3!\",\"difficulty\":\"Easy peasy\",\"facebooktemplate\":\"I've been learning about cloud deployment on AWS lately, and I'm so excited to share something I just built!\\n\\nI put together a project where I hosted my own static website on Amazon S3. The coolest part was definitely tackling the public access settings and fixing an interesting challenge to get the website visible online.\\n\\nCheck out my work at NextWork:\\n#awscloud #amazons3 #AWSBeginners\",\"icon\":\"/projects/static/1/icon3.png\",\"instagramtemplate\":\"Day 1 of the AWS Projects Challenge is a wrap!\\nI built a static website and hosted it on Amazon S3.\\n\\nMy favorite parts were:\\n\\n- Creating and configuring an Amazon S3 bucket, complete with the right access settings.\\n- Uploading the website content and diving deep into how static hosting works.\\n- Fixing an interesting challenge with the website's public visibility.\\n\\nIt was a great way to learn the fundamentals of S3. What projects are you working on?\\n\\nThanks @itsnextwork for the project idea!\\n\\nCheck out my documentation to see how I built it:\\n\\n. . .\\n#awscloud #amazons3 #AWSBeginnersChallenge #NextWork\",\"needs\":[\"\\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-account-setup?utm_source=project-app\\\\\\\"\\u003eSet Up An AWS Account for Free\\u003c/a\\u003e\\u003c/u\\u003e\"],\"part\":2,\"plan\":\"free\",\"sharetemplate\":\"That's Day #1 of my AWS Projects Challenge done!\\nToday I hosted my very own static website on Amazon S3:\\n✅ Created and configured an Amazon S3 bucket, complete with ACLs, versioning, and public access.\\n✅ Uploaded website content, diving deep into how static websites function and how to host them on S3.\\n✅ Tackled public access settings and fixed an interesting challenge with the website's visibility.\\n\\n📸 See my journey from creating buckets to deploying a fully functional static website in my documentation below.\\n\\n📢 Shoutout to all AWS learners - let's connect, share tips, and keep improving!\\n\\n🙏 Big thanks to @NextWork for setting up this engaging challenge. Ready for the next one!\\n#awscloud #amazons3 #AWSBeginnersChallenge #NextWork\",\"time\":\"45 min\",\"title\":\"Host a Website on Amazon S3\",\"tracks\":[{\"description\":\"You're on your own! Great for those who want to dive in headfirst.\",\"id\":\"no\",\"title\":\"On Your Own\"},{\"description\":\"Leaves most of it up to you. Great for those looking for a challenge.\",\"id\":\"low\",\"title\":\"Some Guidance\"},{\"description\":\"Gives step-by-step instructions for every part. Great for beginners!\",\"id\":\"high\",\"title\":\"Step-by-Step Guidance\"}],\"twittertemplate\":\"Just completed a new project! I built a static website.\\n\\nIt was a great experience. Here’s a quick look at how I did it:\\n\\n- Created and configured an Amazon S3 bucket\\n- Uploaded website content\\n- Tackled public access settings\\n\\n👇 Check out my step-by-step process here:\\n#awscloud #amazons3 #AWSBeginnersChallenge\",\"visibility\":\"public\"},\"progress\":100,\"status\":\"COMPLETE\",\"variables\":[{\"name\":\"YOURNAME\",\"value\":\"tawanda\"}]}";
+    </script>
+
+    
+    <script
+      async
+      src="https://js.sentry-cdn.com/149a6bc4cd616ff81bea862cf35e71eb.min.js"
+      data-lazy="no"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.sentryOnLoad = function () {
+        window.Sentry.init({
+          environment: "prod",
+        });
+      };
+    </script>
+    <script async>
+      window.addEventListener("DOMContentLoaded", function () {
+        !(function (t, e) {
+          var o, n, p, r;
+          e.__SV ||
+            ((window.posthog = e),
+            (e._i = []),
+            (e.init = function (i, s, a) {
+              function g(t, e) {
+                var o = e.split(".");
+                2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                  (t[e] = function () {
+                    t.push(
+                      [e].concat(Array.prototype.slice.call(arguments, 0))
+                    );
+                  });
+              }
+              ((p = t.createElement("script")).type = "text/javascript"),
+                (p.crossOrigin = "anonymous"),
+                (p.async = !0),
+                (p.src =
+                  s.api_host.replace(
+                    ".i.posthog.com",
+                    "-assets.i.posthog.com"
+                  ) + "/static/array.js"),
+                (r =
+                  t.getElementsByTagName("script")[0]).parentNode.insertBefore(
+                  p,
+                  r
+                );
+              var u = e;
+              for (
+                void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                  u.people = u.people || [],
+                  u.toString = function (t) {
+                    var e = "posthog";
+                    return (
+                      "posthog" !== a && (e += "." + a),
+                      t || (e += " (stub)"),
+                      e
+                    );
+                  },
+                  u.people.toString = function () {
+                    return u.toString(1) + ".people (stub)";
+                  },
+                  o =
+                    "init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(
+                      " "
+                    ),
+                  n = 0;
+                n < o.length;
+                n++
+              )
+                g(u, o[n]);
+              e._i.push([i, s, a]);
+            }),
+            (e.__SV = 1));
+        })(document, window.posthog || []);
+        window.posthog.init("phc_4MP1TVN8zO0ATelTlIkH8gy25NVh9BiMRqFNrLtO86k", {
+          api_host: "https://us.i.posthog.com",
+          defaults: "2025-05-24",
+          person_profiles: "always",
+        });
+      });
+    </script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-P3ZJGC0XCG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-P3ZJGC0XCG", {
+        linker: {
+          domains: [
+            "learn.nextwork.org",
+            "community.nextwork.org",
+            "www.nextwork.org",
+            "nextwork.org",
+          ],
+        },
+      });
+    </script>
+    
+
+    <div id="app"></div>
+
+    
+
+    <noscript>
+      <style>
+        .no-js-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          font-family: system-ui, sans-serif;
+          padding: 3rem 1rem;
+        }
+
+        .no-js-logo {
+          position: absolute;
+          top: 1rem;
+          left: 1rem;
+          padding: 0.5rem;
+          background: white;
+          border-radius: 0.75rem;
+        }
+
+        .no-js-container {
+          padding-bottom: 10rem;
+          max-width: 36rem;
+          width: 100%;
+          text-align: left;
+          color: #1f2937;
+        }
+
+        .no-js-badge {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          border: 1px solid #d1d5db;
+          border-radius: 0.5rem;
+          width: fit-content;
+          padding: 0.25rem 0.625rem;
+          margin-bottom: 1rem;
+        }
+
+        .no-js-badge-dot {
+          background: #1b1918;
+          width: 0.5rem;
+          height: 0.5rem;
+          border-radius: 50%;
+        }
+
+        .no-js-badge-text {
+          font-size: 0.875rem;
+          color: #374151;
+        }
+
+        .no-js-heading {
+          font-size: 3.75rem;
+          font-weight: 600;
+          line-height: 1;
+          margin: 1.5rem 0;
+          color: #111827;
+        }
+
+        .no-js-description {
+          font-size: 1.25rem;
+          color: #6b7280;
+          line-height: 1.6;
+          margin: 0;
+          width: 80%;
+        }
+
+        .no-js-shield {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+
+        .no-js-logo-image {
+          width: 2rem;
+          height: 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .no-js-heading {
+            font-size: 2.5rem;
+          }
+
+          .no-js-description {
+            font-size: 1.125rem;
+            width: 100%;
+          }
+
+          .no-js-container {
+            padding: 0 1rem;
+          }
+        }
+      </style>
+      <div class="no-js-overlay">
+        <div class="no-js-logo">
+          <img
+            src="/static/nextwork-icon-back.svg"
+            alt="NextWork logo"
+            class="no-js-logo-image"
+          />
+        </div>
+        <div class="no-js-container">
+          <img
+            src="/static/shield-zap.svg"
+            alt="Shield with zap icon"
+            class="no-js-shield"
+          />
+          <h1 class="no-js-heading">JavaScript is required, whaaaaaaat!</h1>
+          <p class="no-js-description">
+            NextWork requires JavaScript to function properly. Please enable
+            JavaScript or disable any script-blocking tools like Brave Shields
+            to use this site.
+          </p>
+        </div>
+      </div>
+    </noscript>
+  </body>
+</html>
