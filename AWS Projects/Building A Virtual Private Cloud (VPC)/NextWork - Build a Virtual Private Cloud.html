@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+     
+    <title>NextWork - Build a Virtual Private Cloud</title>
+    <meta content="Let&#39;s learn the networking backbone of AWS - Amazon VPC!" name="description" />
+    <meta
+      content="NextWork - Build a Virtual Private Cloud"
+      property="og:title"
+    />
+    <meta
+      content="Let&#39;s learn the networking backbone of AWS - Amazon VPC!"
+      property="og:description"
+    />
+    <meta
+      content="NextWork - Build a Virtual Private Cloud"
+      property="twitter:title"
+    />
+    <meta
+      content="Let&#39;s learn the networking backbone of AWS - Amazon VPC!"
+      property="twitter:description"
+    />
+    
+    <meta content="/static/og-project.png" property="og:image" />
+    <meta content="/static/og-project.png" property="twitter:image" />
+    
+    <meta property="og:type" content="website" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    
+    <link rel="canonical" href="https://learn.nextwork.org/projects/aws-networks-vpc?track=high" />
+     
+    <meta content="https://learn.nextwork.org/projects/aws-networks-vpc?track=high" property="og:url" />
+    
+    <meta content="NextWork" property="og:site_name" />
+    <meta property="og:locale" content="en_US" />
+
+    
+    
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"LearningResource","about":"\u003ca target=\"_blank\" href=\"https://aws.amazon.com/vpc/\"\u003eAmazon VPC\u003c/a\u003e","description":"Let's learn the networking backbone of AWS - Amazon VPC!","educationalLevel":"Easy peasy","estimatedCost":"$0","inLanguage":"en-US","learningResourceType":["Tutorial","Hands-on Project"],"name":"Build a Virtual Private Cloud","provider":{"@type":"Organization","name":"NextWork"},"teaches":"Let's learn the networking backbone of AWS - Amazon VPC!","timeRequired":"PT60M","tool":["\u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-account-setup?utm_source=project-app\\\"\u003eSet Up An AWS Account for Free\u003c/a\u003e\u003c/u\u003e","Part 1: You are here!","Part 2: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-networks-security?utm_source=project-app\"\u003eVPC Traffic Flow and Security\u003c/a\u003e\u003c/u\u003e","Part 3: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-networks-private?utm_source=project-app\"\u003eCreating a Private Subnet\u003c/a\u003e\u003c/u\u003e","Part 4: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-networks-ec2?utm_source=project-app\"\u003eLaunching VPC Resources\u003c/a\u003e\u003c/u\u003e","Part 5: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-networks-connectivity?utm_source=project-app\"\u003eTesting VPC Connectivity\u003c/a\u003e\u003c/u\u003e","Part 6: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-networks-peering?utm_source=project-app\"\u003eVPC Peering\u003c/a\u003e\u003c/u\u003e","Part 7: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-networks-monitoring?utm_source=project-app\"\u003eVPC Monitoring with Flow Logs\u003c/a\u003e\u003c/u\u003e","Part 8: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-networks-s3?utm_source=project-app\"\u003eAccess S3 from a VPC\u003c/a\u003e\u003c/u\u003e","Part 9: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-networks-endpoints?utm_source=project-app\"\u003eVPC Endpoints\u003c/a\u003e\u003c/u\u003e"],"url":"https://learn.nextwork.org/projects/aws-networks-vpc?track=high"}
+    </script>
+    
+
+    <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+    <link rel="icon" href="/static/favicon.svg?v=2" type="image/svg+xml" />
+
+    
+    <link
+      rel="preload"
+      href="/static/fonts/fk-grotesk-neue/woff2/FKGroteskNeue-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/fk-grotesk-neue/woff2/FKGroteskNeue-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/suisse-neue/woff2/SuisseNeue-Regular-WebS.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/suisse-neue/woff2/SuisseNeue-Medium-WebS.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    
+	<link rel="stylesheet" href="/static/assets/entry-47669cd6.css">
+	<script type="module" src="/static/assets/entry-8cf81344.js"></script>
+	<link rel="modulepreload" href="/static/assets/entry-8cf81344.js"><link rel="modulepreload" href="/static/assets/chunk-bd50b88a.js"><link rel="modulepreload" href="/static/assets/document_components-b35a0cd8.js">
+
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overscroll-behavior: none;
+        background-color: #f8f5f1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script id="nw-bootstrap">
+      window.__PRELOADED_STATE__ = "eyJ1c2VyIjp7ImVtYWlsIjoibmlnZWwuY2hpdGFwaUBnbWFpbC5jb20iLCJleHAiOjE3NjQ3MTA3MDAsImlkIjoic3dBeUxWQmd0QW9EOHZlNzRyS2EiLCJuYW1lIjoiVGF3YW5kYSBOaWdlbCBDaGl0YXBpIiwibmlja25hbWUiOiJoZWFydGZlbHRfY3lhbl9nbGFtb3JvdXNfbWVkbGFyIiwicGljdHVyZSI6Ii9oZWFydGZlbHRfY3lhbl9nbGFtb3JvdXNfbWVkbGFyL3VwbG9hZHMvcHJvZmlsZV9waWN0dXJlX2U2Zjg3ZTAwLTQ4NDgtNDk2NC1hYTYzLWQwYTJlNWFhMzI3YyIsInBsYW4iOiJmcmVlIiwidmFuaXR5U2x1ZyI6ImJ1aWxkLWEtdmlydHVhbC1wcml2YXRlLW5ldHdvcmsifSwicHJlZmVyZW5jZXMiOnsiY3VycmVudFByb2plY3QiOiJhd3MtbmV0d29ya3MtdnBjIiwiZGF5c1BlcldlZWsiOjUsImRvY3VtZW50YXRpb25UaGVtZSI6ImxpZ2h0IiwiaG91cnNQZXJEYXkiOjEsInNlbGVjdGVkQ2F0ZWdvcmllcyI6bnVsbH0sImZlYXR1cmVzIjp7ImFwcC5hcHBfdmVyc2lvbl9yZWxvYWRpbmciOnRydWUsImFwcC5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BvcnRhbCI6dHJ1ZSwiYXBwLnBvcnRmb2xpbyI6dHJ1ZSwiYXBwLnJlbmRlcl9yZWFjdF9zaGVsbCI6dHJ1ZSwiZ2VuZXJhbC5wcm9kIjp0cnVlLCJwcm9qZWN0cy5jaGF0X3Rvb2xiYXIiOnRydWUsInByb2plY3RzLmNvdXJzZV90cmFjayI6dHJ1ZSwicHJvamVjdHMuY3VzdG9tX2xvZ2luIjp0cnVlLCJwcm9qZWN0cy5lZGl0b3IiOnRydWUsInByb2plY3RzLmhpZ2hsaWdodHMiOnRydWUsInByb2plY3RzLmxpdmVfZG9jc19kcmF3Ijp0cnVlLCJwcm9qZWN0cy5sb2dpbiI6dHJ1ZSwicHJvamVjdHMubmF2VjIiOnRydWUsInByb2plY3RzLnBheW1lbnRzIjp0cnVlLCJwcm9qZWN0cy5wZGZfZG93bmxvYWRpbmciOnRydWUsInByb2plY3RzLnByb2plY3RfaW5fcHJvZ3Jlc3Nfc3RhdHVzIjp0cnVlLCJwcm9qZWN0cy5zaGFyaW5nVjIiOnRydWUsInByb2plY3RzLnNpbXBsaWZ5Ijp0cnVlfSwiYXBwU2V0dGluZ3MiOnsiYXBwVmVyc2lvbiI6IjEuMC4xIn0sImxpbWl0cyI6eyJwb3J0Zm9saW9Eb2N1bWVudCI6eyJsaW1pdCI6eyJmcmVlIjozLCJwcm8iOjEwMDAwMDB9fSwicXVpekNvbXBsZXRpb24iOnsiY3VycmVudCI6MywibGltaXQiOnsiZnJlZSI6NSwicHJvIjoxMDAwMDAwfX0sInZhbGlkYXRpb25UZXh0Q2hhcmFjdGVyIjp7ImxpbWl0Ijp7ImZyZWUiOjI1MCwicHJvIjoxMDAwfX19LCJwcm9qZWN0Ijp7ImNvbXBsZXRlZEJ5IjpbImh0dHBzOi8vcy5ncmF2YXRhci5jb20vYXZhdGFyLzcwMzk4YTliZGIyNGI4NzE2ZDIwNGNkZGM0MzZkZmEzP3M9NDgwXHUwMDI2cj1wZ1x1MDAyNmQ9aHR0cHMlM0ElMkYlMkZjZG4uYXV0aDAuY29tJTJGYXZhdGFycyUyRmV6LnBuZyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0syR0U5ejFRYnhhWkx6LWs0MnRWNV9uRGxuX1U1X2p6NjZSZi1NMUxDeWFSWlQzcGhwPXM5Ni1jIiwiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlV2MTFkSkZpREY4dG9PNWdyazBFSmtEUHQ3Y3I0M29SbTBMWmxtMHZfNWhvMEp0MD1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lNUkVKczdNNG12Wkl2ajQxdHlkazlURnN1VHFIRUV0bm9jaGVTRUJhT2VyWm1XUT1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tOTzRZN0RXTDNTMkxvT1RjV3lnRGUwaUxoN0lacHFkb1RueWswOXhwaUtQRmtaRDg9czk2LWMiLCJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iYWYzNjMzYjE0M2MyNDMzZDc5OGRkM2NhMjNiOTk5ZD9zPTQ4MFx1MDAyNnI9cGdcdTAwMjZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZwby5wbmciLCJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci82NjA0ZTdiNjdiM2JkYTY4OWEyY2ZlYmY0ODQzYWMwNj9zPTQ4MFx1MDAyNnI9cGdcdTAwMjZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZvcC5wbmciLCJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iYjEzOGRhZjBlMWM4YzEwMTcwZDY2NzhmYWUzZjhiYz9zPTQ4MFx1MDAyNnI9cGdcdTAwMjZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZhYi5wbmciLCJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci84YWVlMmViZTA2ZjlmYjEyMTRiYzBmODIxODcxNGIzZj9zPTQ4MFx1MDAyNnI9cGdcdTAwMjZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZidS5wbmciLCJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NJY2UzOHUtQlNaYkRRYnJDalJVUFhBY21kcDlYRkpiM081VGtnQUZfTEI2TEZYd1E9czk2LWMiXSwiY29tcGxldGlvbnMiOjEzNjIsImRvY1N0YXR1cyI6IkNSRUFURUQiLCJoYXNVcGRhdGVzIjpmYWxzZSwiaWQiOiJhd3MtbmV0d29ya3MtdnBjIiwibG9ja2VkIjp0cnVlLCJtZXRhZGF0YSI6eyJjYXRlZ29yeSI6IkFtYXpvbiBWUEMiLCJjb25jZXB0cyI6WyJcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL2F3cy5hbWF6b24uY29tL3ZwYy9cIlx1MDAzZUFtYXpvbiBWUENcdTAwM2MvYVx1MDAzZSJdLCJjb3N0IjoiJDAiLCJkZXNjcmlwdGlvbiI6IkxldCdzIGxlYXJuIHRoZSBuZXR3b3JraW5nIGJhY2tib25lIG9mIEFXUyAtIEFtYXpvbiBWUEMhIiwiZGlmZmljdWx0eSI6IkVhc3kgcGVhc3kiLCJmYWNlYm9va3RlbXBsYXRlIjoiSSd2ZSBiZWVuIGxlYXJuaW5nIGFib3V0IEFtYXpvbiBWUEMgbGF0ZWx5LCBhbmQgSSdtIHNvIGV4Y2l0ZWQgdG8gc2hhcmUgc29tZXRoaW5nIEkganVzdCBidWlsdCFcblxuSSBwdXQgdG9nZXRoZXIgYSBwcm9qZWN0IHdoZXJlIEkgYnVpbHQgYSBjdXN0b20sIGlzb2xhdGVkIGNsb3VkIG5ldHdvcmsgdXNpbmcgQW1hem9uIFZQQy4gVGhlIGNvb2xlc3QgcGFydCB3YXMgZGVmaW5pdGVseSB3YXRjaGluZyByZXNvdXJjZXMgaW4gbXkgcHVibGljIHN1Ym5ldCBzdWNjZXNzZnVsbHkgc2VuZCBhbmQgcmVjZWl2ZSB0cmFmZmljIGZyb20gdGhlIGludGVybmV0LlxuXG5DaGVjayBvdXQgbXkgd29yayBhdCBOZXh0V29yazpcbiNBV1MgI0Nsb3VkQ29tcHV0aW5nICNOZXR3b3JraW5nIiwiaWNvbiI6Ii9wcm9qZWN0cy9zdGF0aWMvYXdzLW5ldHdvcmtzLXZwYy9pY29uLnBuZyIsImluc3RhZ3JhbXRlbXBsYXRlIjoiTmV3IHByb2plY3QgZG9uZSEgVG9kYXkgSSBzcGVudCBzb21lIHRpbWUgdW5kZXJzdGFuZGluZyBBbWF6b24gVlBDLlxuXG5JIGJ1aWx0IGEgdmlydHVhbCBwcml2YXRlIGNsb3VkIHRvIGxlYXJuIGhvdyBJUCBhZGRyZXNzaW5nIGFuZCBzdWJuZXRzIHdvcmsuXG5cbk15IGZhdm9yaXRlIHBhcnRzIHdlcmU6XG5cbi0gQ3JlYXRpbmcgYSBWaXJ0dWFsIFByaXZhdGUgQ2xvdWQgYW5kIGxlYXJuaW5nIGFib3V0IENJRFIgYmxvY2tzLlxuLSBTZXR0aW5nIHVwIGEgcHVibGljIHN1Ym5ldCB0byBhdXRvbWF0aWNhbGx5IGFzc2lnbiBwdWJsaWMgSVAgYWRkcmVzc2VzLlxuLSBBdHRhY2hpbmcgYW4gaW50ZXJuZXQgZ2F0ZXdheSB0byBhbGxvdyB0cmFmZmljIHRvIGFuZCBmcm9tIHRoZSBpbnRlcm5ldC5cblxuSXQgd2FzIHNvIGNvb2wgdG8gc2VlIGhvdyB0aGVzZSBmdW5kYW1lbnRhbCBuZXR3b3JraW5nIGNvbXBvbmVudHMgZml0IHRvZ2V0aGVyLiBXaGF0IGFyZSB5b3UgbGVhcm5pbmcgYWJvdXQgaW4gdGhlIGNsb3VkP1xuXG5UaGFua3MgQGl0c25leHR3b3JrIGZvciB0aGUgcHJvamVjdCBpZGVhIVxuXG5DaGVjayBvdXQgbXkgZG9jdW1lbnRhdGlvbiB0byBzZWUgaG93IEkgYnVpbHQgaXQ6XG5cbi4gLiAuXG4jQVdTICNDbG91ZENvbXB1dGluZyAjTmV0d29ya2luZyAjQW1hem9uVlBDIiwibmVlZHMiOlsiXHUwMDNjdVx1MDAzZVx1MDAzY2EgdGFyZ2V0PVwiX2JsYW5rXCIgaHJlZj1cImh0dHBzOi8vbGVhcm4ubmV4dHdvcmsub3JnL3Byb2plY3RzL2F3cy1hY2NvdW50LXNldHVwP3V0bV9zb3VyY2U9cHJvamVjdC1hcHBcXFwiXHUwMDNlU2V0IFVwIEFuIEFXUyBBY2NvdW50IGZvciBGcmVlXHUwMDNjL2FcdTAwM2VcdTAwM2MvdVx1MDAzZSIsIlBhcnQgMTogWW91IGFyZSBoZXJlISIsIlBhcnQgMjogXHUwMDNjdVx1MDAzZVx1MDAzY2EgdGFyZ2V0PVwiX2JsYW5rXCIgaHJlZj1cImh0dHBzOi8vbGVhcm4ubmV4dHdvcmsub3JnL3Byb2plY3RzL2F3cy1uZXR3b3Jrcy1zZWN1cml0eT91dG1fc291cmNlPXByb2plY3QtYXBwXCJcdTAwM2VWUEMgVHJhZmZpYyBGbG93IGFuZCBTZWN1cml0eVx1MDAzYy9hXHUwMDNlXHUwMDNjL3VcdTAwM2UiLCJQYXJ0IDM6IFx1MDAzY3VcdTAwM2VcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL2xlYXJuLm5leHR3b3JrLm9yZy9wcm9qZWN0cy9hd3MtbmV0d29ya3MtcHJpdmF0ZT91dG1fc291cmNlPXByb2plY3QtYXBwXCJcdTAwM2VDcmVhdGluZyBhIFByaXZhdGUgU3VibmV0XHUwMDNjL2FcdTAwM2VcdTAwM2MvdVx1MDAzZSIsIlBhcnQgNDogXHUwMDNjdVx1MDAzZVx1MDAzY2EgdGFyZ2V0PVwiX2JsYW5rXCIgaHJlZj1cImh0dHBzOi8vbGVhcm4ubmV4dHdvcmsub3JnL3Byb2plY3RzL2F3cy1uZXR3b3Jrcy1lYzI/dXRtX3NvdXJjZT1wcm9qZWN0LWFwcFwiXHUwMDNlTGF1bmNoaW5nIFZQQyBSZXNvdXJjZXNcdTAwM2MvYVx1MDAzZVx1MDAzYy91XHUwMDNlIiwiUGFydCA1OiBcdTAwM2N1XHUwMDNlXHUwMDNjYSB0YXJnZXQ9XCJfYmxhbmtcIiBocmVmPVwiaHR0cHM6Ly9sZWFybi5uZXh0d29yay5vcmcvcHJvamVjdHMvYXdzLW5ldHdvcmtzLWNvbm5lY3Rpdml0eT91dG1fc291cmNlPXByb2plY3QtYXBwXCJcdTAwM2VUZXN0aW5nIFZQQyBDb25uZWN0aXZpdHlcdTAwM2MvYVx1MDAzZVx1MDAzYy91XHUwMDNlIiwiUGFydCA2OiBcdTAwM2N1XHUwMDNlXHUwMDNjYSB0YXJnZXQ9XCJfYmxhbmtcIiBocmVmPVwiaHR0cHM6Ly9sZWFybi5uZXh0d29yay5vcmcvcHJvamVjdHMvYXdzLW5ldHdvcmtzLXBlZXJpbmc/dXRtX3NvdXJjZT1wcm9qZWN0LWFwcFwiXHUwMDNlVlBDIFBlZXJpbmdcdTAwM2MvYVx1MDAzZVx1MDAzYy91XHUwMDNlIiwiUGFydCA3OiBcdTAwM2N1XHUwMDNlXHUwMDNjYSB0YXJnZXQ9XCJfYmxhbmtcIiBocmVmPVwiaHR0cHM6Ly9sZWFybi5uZXh0d29yay5vcmcvcHJvamVjdHMvYXdzLW5ldHdvcmtzLW1vbml0b3Jpbmc/dXRtX3NvdXJjZT1wcm9qZWN0LWFwcFwiXHUwMDNlVlBDIE1vbml0b3Jpbmcgd2l0aCBGbG93IExvZ3NcdTAwM2MvYVx1MDAzZVx1MDAzYy91XHUwMDNlIiwiUGFydCA4OiBcdTAwM2N1XHUwMDNlXHUwMDNjYSB0YXJnZXQ9XCJfYmxhbmtcIiBocmVmPVwiaHR0cHM6Ly9sZWFybi5uZXh0d29yay5vcmcvcHJvamVjdHMvYXdzLW5ldHdvcmtzLXMzP3V0bV9zb3VyY2U9cHJvamVjdC1hcHBcIlx1MDAzZUFjY2VzcyBTMyBmcm9tIGEgVlBDXHUwMDNjL2FcdTAwM2VcdTAwM2MvdVx1MDAzZSIsIlBhcnQgOTogXHUwMDNjdVx1MDAzZVx1MDAzY2EgdGFyZ2V0PVwiX2JsYW5rXCIgaHJlZj1cImh0dHBzOi8vbGVhcm4ubmV4dHdvcmsub3JnL3Byb2plY3RzL2F3cy1uZXR3b3Jrcy1lbmRwb2ludHM/dXRtX3NvdXJjZT1wcm9qZWN0LWFwcFwiXHUwMDNlVlBDIEVuZHBvaW50c1x1MDAzYy9hXHUwMDNlXHUwMDNjL3VcdTAwM2UiXSwib3JkZXIiOiI2LjEiLCJwYXJ0IjoxLCJwbGFuIjoiZnJlZSIsInNoYXJldGVtcGxhdGUiOiJUb2RheSBJIHNwZW50IHNvbWUgdGltZSB1bmRlcnN0YW5kaW5nIEFtYXpvbiBWUEMhXG5cbkhlcmXigJlzIHdoYXQgSSBhY2NvbXBsaXNoZWQ6IPCfkYdcbuKchSBDcmVhdGVkIGEgVmlydHVhbCBQcml2YXRlIENsb3VkICB1c2luZyBBbWF6b24gVlBDLCBhbmQgbGVhcm50IGhvdyBJUCBhZGRyZXNzaW5nIGFuZCBDSURSIGJsb2NrcyB3b3JrLlxu4pyFIFNldCB1cCBhIHB1YmxpYyBzdWJuZXQgdG8gYXV0b21hdGljYWxseSBhc3NpZ24gcHVibGljIElQIGFkZHJlc3NlcywgZW5zdXJpbmcgYW55IEVDMiBpbnN0YW5jZXMgZGVwbG95ZWQgaW4gdGhlIHN1Ym5ldCBjYW4gYmUgYWNjZXNzZWQgZnJvbSB0aGUgaW50ZXJuZXQuXG7inIUgQXR0YWNoZWQgYW4gaW50ZXJuZXQgZ2F0ZXdheSB0byB0aGUgVlBDLCB3aGljaCBlbmFibGVzIHJlc291cmNlcyBpbiBteSBwdWJsaWMgc3VibmV0IHRvIHNlbmQgYW5kIHJlY2VpdmUgdHJhZmZpYyB0byBhbmQgZnJvbSB0aGUgaW50ZXJuZXQuXG5cbvCfk7ggRGl2ZSBkZWVwZXIgaW50byBteSBqb3VybmV5IGJ5IGNoZWNraW5nIG91dCB0aGUgZG9jdW1lbnRhdGlvbiBiZWxvdyFcblxu8J+ZjyBNYXNzaXZlIHRoYW5rcyB0byBATmV4dFdvcmsgZm9yIHRoZSBpbnZhbHVhYmxlIHJlc291cmNlcyBhbmQgY29tbXVuaXR5LlxuI0FXUyAjQ2xvdWRDb21wdXRpbmcgI05ldHdvcmtpbmcgI0FtYXpvblZQQyIsInRpbWUiOiI2MCBtaW4iLCJ0aXRsZSI6IkJ1aWxkIGEgVmlydHVhbCBQcml2YXRlIENsb3VkIiwidHJhY2tzIjpbeyJkZXNjcmlwdGlvbiI6IllvdSdyZSBvbiB5b3VyIG93biEgR3JlYXQgZm9yIHRob3NlIHdobyB3YW50IHRvIGRpdmUgaW4gaGVhZGZpcnN0LiIsImlkIjoibm8iLCJ0aXRsZSI6Ik9uIFlvdXIgT3duIn0seyJkZXNjcmlwdGlvbiI6IkxlYXZlcyBtb3N0IG9mIGl0IHVwIHRvIHlvdS4gR3JlYXQgZm9yIHRob3NlIGxvb2tpbmcgZm9yIGEgY2hhbGxlbmdlLiIsImlkIjoibG93IiwidGl0bGUiOiJTb21lIEd1aWRhbmNlIn0seyJkZXNjcmlwdGlvbiI6IkdpdmVzIHN0ZXAtYnktc3RlcCBpbnN0cnVjdGlvbnMgZm9yIGV2ZXJ5IHBhcnQuIEdyZWF0IGZvciBiZWdpbm5lcnMhIiwiaWQiOiJoaWdoIiwidGl0bGUiOiJTdGVwLWJ5LVN0ZXAgR3VpZGFuY2UifV0sInR3aXR0ZXJ0ZW1wbGF0ZSI6Ikp1c3QgY29tcGxldGVkIGEgbmV3IHByb2plY3QhIEkgYnVpbHQgYW4gQW1hem9uIFZQQy5cblxuSXQgd2FzIGEgZ3JlYXQgZXhwZXJpZW5jZS4gSGVyZeKAmXMgYSBxdWljayBsb29rIGF0IGhvdyBJIGRpZCBpdDpcblxuLSBDcmVhdGVkIGEgVmlydHVhbCBQcml2YXRlIENsb3VkIHVzaW5nIEFtYXpvbiBWUENcbi0gU2V0IHVwIGEgcHVibGljIHN1Ym5ldCBmb3IgaW50ZXJuZXQgYWNjZXNzXG4tIEF0dGFjaGVkIGFuIGludGVybmV0IGdhdGV3YXkgdG8gdGhlIFZQQ1xuXG7wn5GHIENoZWNrIG91dCBteSBzdGVwLWJ5LXN0ZXAgcHJvY2VzcyBoZXJlOlxuI0FXUyAjQ2xvdWRDb21wdXRpbmcgI0FtYXpvblZQQyIsInZpc2liaWxpdHkiOiJwdWJsaWMifSwicHJvZ3Jlc3MiOjEwMCwic3RhdHVzIjoiQ09NUExFVEUiLCJ2YXJpYWJsZXMiOlt7Im5hbWUiOiJZT1VSTkFNRSJ9XX19";
+      window.project = "{\"completedBy\":[\"https://s.gravatar.com/avatar/70398a9bdb24b8716d204cddc436dfa3?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fez.png\",\"https://lh3.googleusercontent.com/a/ACg8ocK2GE9z1QbxaZLz-k42tV5_nDln_U5_jz66Rf-M1LCyaRZT3php=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocJUv11dJFiDF8toO5grk0EJkDPt7cr43oRm0LZlm0v_5ho0Jt0=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocIMREJs7M4mvZIvj41tydk9TFsuTqHEEtnocheSEBaOerZmWQ=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocKNO4Y7DWL3S2LoOTcWygDe0iLh7IZpqdoTnyk09xpiKPFkZD8=s96-c\",\"https://s.gravatar.com/avatar/baf3633b143c2433d798dd3ca23b999d?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fpo.png\",\"https://s.gravatar.com/avatar/6604e7b67b3bda689a2cfebf4843ac06?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fop.png\",\"https://s.gravatar.com/avatar/bb138daf0e1c8c10170d6678fae3f8bc?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fab.png\",\"https://s.gravatar.com/avatar/8aee2ebe06f9fb1214bc0f8218714b3f?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fbu.png\",\"https://lh3.googleusercontent.com/a/ACg8ocIce38u-BSZbDQbrCjRUPXAcmdp9XFJb3O5TkgAF_LB6LFXwQ=s96-c\"],\"completions\":1362,\"docStatus\":\"CREATED\",\"hasUpdates\":false,\"id\":\"aws-networks-vpc\",\"locked\":true,\"metadata\":{\"category\":\"Amazon VPC\",\"concepts\":[\"\\u003ca target=\\\"_blank\\\" href=\\\"https://aws.amazon.com/vpc/\\\"\\u003eAmazon VPC\\u003c/a\\u003e\"],\"cost\":\"$0\",\"description\":\"Let's learn the networking backbone of AWS - Amazon VPC!\",\"difficulty\":\"Easy peasy\",\"facebooktemplate\":\"I've been learning about Amazon VPC lately, and I'm so excited to share something I just built!\\n\\nI put together a project where I built a custom, isolated cloud network using Amazon VPC. The coolest part was definitely watching resources in my public subnet successfully send and receive traffic from the internet.\\n\\nCheck out my work at NextWork:\\n#AWS #CloudComputing #Networking\",\"icon\":\"/projects/static/aws-networks-vpc/icon.png\",\"instagramtemplate\":\"New project done! Today I spent some time understanding Amazon VPC.\\n\\nI built a virtual private cloud to learn how IP addressing and subnets work.\\n\\nMy favorite parts were:\\n\\n- Creating a Virtual Private Cloud and learning about CIDR blocks.\\n- Setting up a public subnet to automatically assign public IP addresses.\\n- Attaching an internet gateway to allow traffic to and from the internet.\\n\\nIt was so cool to see how these fundamental networking components fit together. What are you learning about in the cloud?\\n\\nThanks @itsnextwork for the project idea!\\n\\nCheck out my documentation to see how I built it:\\n\\n. . .\\n#AWS #CloudComputing #Networking #AmazonVPC\",\"needs\":[\"\\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-account-setup?utm_source=project-app\\\\\\\"\\u003eSet Up An AWS Account for Free\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 1: You are here!\",\"Part 2: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-networks-security?utm_source=project-app\\\"\\u003eVPC Traffic Flow and Security\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 3: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-networks-private?utm_source=project-app\\\"\\u003eCreating a Private Subnet\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 4: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-networks-ec2?utm_source=project-app\\\"\\u003eLaunching VPC Resources\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 5: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-networks-connectivity?utm_source=project-app\\\"\\u003eTesting VPC Connectivity\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 6: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-networks-peering?utm_source=project-app\\\"\\u003eVPC Peering\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 7: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-networks-monitoring?utm_source=project-app\\\"\\u003eVPC Monitoring with Flow Logs\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 8: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-networks-s3?utm_source=project-app\\\"\\u003eAccess S3 from a VPC\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 9: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-networks-endpoints?utm_source=project-app\\\"\\u003eVPC Endpoints\\u003c/a\\u003e\\u003c/u\\u003e\"],\"order\":\"6.1\",\"part\":1,\"plan\":\"free\",\"sharetemplate\":\"Today I spent some time understanding Amazon VPC!\\n\\nHere’s what I accomplished: 👇\\n✅ Created a Virtual Private Cloud  using Amazon VPC, and learnt how IP addressing and CIDR blocks work.\\n✅ Set up a public subnet to automatically assign public IP addresses, ensuring any EC2 instances deployed in the subnet can be accessed from the internet.\\n✅ Attached an internet gateway to the VPC, which enables resources in my public subnet to send and receive traffic to and from the internet.\\n\\n📸 Dive deeper into my journey by checking out the documentation below!\\n\\n🙏 Massive thanks to @NextWork for the invaluable resources and community.\\n#AWS #CloudComputing #Networking #AmazonVPC\",\"time\":\"60 min\",\"title\":\"Build a Virtual Private Cloud\",\"tracks\":[{\"description\":\"You're on your own! Great for those who want to dive in headfirst.\",\"id\":\"no\",\"title\":\"On Your Own\"},{\"description\":\"Leaves most of it up to you. Great for those looking for a challenge.\",\"id\":\"low\",\"title\":\"Some Guidance\"},{\"description\":\"Gives step-by-step instructions for every part. Great for beginners!\",\"id\":\"high\",\"title\":\"Step-by-Step Guidance\"}],\"twittertemplate\":\"Just completed a new project! I built an Amazon VPC.\\n\\nIt was a great experience. Here’s a quick look at how I did it:\\n\\n- Created a Virtual Private Cloud using Amazon VPC\\n- Set up a public subnet for internet access\\n- Attached an internet gateway to the VPC\\n\\n👇 Check out my step-by-step process here:\\n#AWS #CloudComputing #AmazonVPC\",\"visibility\":\"public\"},\"progress\":100,\"status\":\"COMPLETE\",\"variables\":[{\"name\":\"YOURNAME\",\"value\":\"tawanda\"}]}";
+    </script>
+
+    
+    <script
+      async
+      src="https://js.sentry-cdn.com/149a6bc4cd616ff81bea862cf35e71eb.min.js"
+      data-lazy="no"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.sentryOnLoad = function () {
+        window.Sentry.init({
+          environment: "prod",
+        });
+      };
+    </script>
+    <script async>
+      window.addEventListener("DOMContentLoaded", function () {
+        !(function (t, e) {
+          var o, n, p, r;
+          e.__SV ||
+            ((window.posthog = e),
+            (e._i = []),
+            (e.init = function (i, s, a) {
+              function g(t, e) {
+                var o = e.split(".");
+                2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                  (t[e] = function () {
+                    t.push(
+                      [e].concat(Array.prototype.slice.call(arguments, 0))
+                    );
+                  });
+              }
+              ((p = t.createElement("script")).type = "text/javascript"),
+                (p.crossOrigin = "anonymous"),
+                (p.async = !0),
+                (p.src =
+                  s.api_host.replace(
+                    ".i.posthog.com",
+                    "-assets.i.posthog.com"
+                  ) + "/static/array.js"),
+                (r =
+                  t.getElementsByTagName("script")[0]).parentNode.insertBefore(
+                  p,
+                  r
+                );
+              var u = e;
+              for (
+                void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                  u.people = u.people || [],
+                  u.toString = function (t) {
+                    var e = "posthog";
+                    return (
+                      "posthog" !== a && (e += "." + a),
+                      t || (e += " (stub)"),
+                      e
+                    );
+                  },
+                  u.people.toString = function () {
+                    return u.toString(1) + ".people (stub)";
+                  },
+                  o =
+                    "init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(
+                      " "
+                    ),
+                  n = 0;
+                n < o.length;
+                n++
+              )
+                g(u, o[n]);
+              e._i.push([i, s, a]);
+            }),
+            (e.__SV = 1));
+        })(document, window.posthog || []);
+        window.posthog.init("phc_4MP1TVN8zO0ATelTlIkH8gy25NVh9BiMRqFNrLtO86k", {
+          api_host: "https://us.i.posthog.com",
+          defaults: "2025-05-24",
+          person_profiles: "always",
+        });
+      });
+    </script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-P3ZJGC0XCG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-P3ZJGC0XCG", {
+        linker: {
+          domains: [
+            "learn.nextwork.org",
+            "community.nextwork.org",
+            "www.nextwork.org",
+            "nextwork.org",
+          ],
+        },
+      });
+    </script>
+    
+
+    <div id="app"></div>
+
+    
+
+    <noscript>
+      <style>
+        .no-js-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          font-family: system-ui, sans-serif;
+          padding: 3rem 1rem;
+        }
+
+        .no-js-logo {
+          position: absolute;
+          top: 1rem;
+          left: 1rem;
+          padding: 0.5rem;
+          background: white;
+          border-radius: 0.75rem;
+        }
+
+        .no-js-container {
+          padding-bottom: 10rem;
+          max-width: 36rem;
+          width: 100%;
+          text-align: left;
+          color: #1f2937;
+        }
+
+        .no-js-badge {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          border: 1px solid #d1d5db;
+          border-radius: 0.5rem;
+          width: fit-content;
+          padding: 0.25rem 0.625rem;
+          margin-bottom: 1rem;
+        }
+
+        .no-js-badge-dot {
+          background: #1b1918;
+          width: 0.5rem;
+          height: 0.5rem;
+          border-radius: 50%;
+        }
+
+        .no-js-badge-text {
+          font-size: 0.875rem;
+          color: #374151;
+        }
+
+        .no-js-heading {
+          font-size: 3.75rem;
+          font-weight: 600;
+          line-height: 1;
+          margin: 1.5rem 0;
+          color: #111827;
+        }
+
+        .no-js-description {
+          font-size: 1.25rem;
+          color: #6b7280;
+          line-height: 1.6;
+          margin: 0;
+          width: 80%;
+        }
+
+        .no-js-shield {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+
+        .no-js-logo-image {
+          width: 2rem;
+          height: 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .no-js-heading {
+            font-size: 2.5rem;
+          }
+
+          .no-js-description {
+            font-size: 1.125rem;
+            width: 100%;
+          }
+
+          .no-js-container {
+            padding: 0 1rem;
+          }
+        }
+      </style>
+      <div class="no-js-overlay">
+        <div class="no-js-logo">
+          <img
+            src="/static/nextwork-icon-back.svg"
+            alt="NextWork logo"
+            class="no-js-logo-image"
+          />
+        </div>
+        <div class="no-js-container">
+          <img
+            src="/static/shield-zap.svg"
+            alt="Shield with zap icon"
+            class="no-js-shield"
+          />
+          <h1 class="no-js-heading">JavaScript is required, whaaaaaaat!</h1>
+          <p class="no-js-description">
+            NextWork requires JavaScript to function properly. Please enable
+            JavaScript or disable any script-blocking tools like Brave Shields
+            to use this site.
+          </p>
+        </div>
+      </div>
+    </noscript>
+  </body>
+</html>

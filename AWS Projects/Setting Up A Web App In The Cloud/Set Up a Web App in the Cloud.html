@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+     
+    <title>NextWork - Set Up a Web App in the Cloud</title>
+    <meta content="Project 1 of the 6 Day DevOps Challenge - Kick off CI/CD pipeline with this foundational project!" name="description" />
+    <meta
+      content="NextWork - Set Up a Web App in the Cloud"
+      property="og:title"
+    />
+    <meta
+      content="Project 1 of the 6 Day DevOps Challenge - Kick off CI/CD pipeline with this foundational project!"
+      property="og:description"
+    />
+    <meta
+      content="NextWork - Set Up a Web App in the Cloud"
+      property="twitter:title"
+    />
+    <meta
+      content="Project 1 of the 6 Day DevOps Challenge - Kick off CI/CD pipeline with this foundational project!"
+      property="twitter:description"
+    />
+    
+    <meta content="/static/og-project.png" property="og:image" />
+    <meta content="/static/og-project.png" property="twitter:image" />
+    
+    <meta property="og:type" content="website" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    
+    <link rel="canonical" href="https://learn.nextwork.org/projects/aws-devops-vscode?track=high" />
+     
+    <meta content="https://learn.nextwork.org/projects/aws-devops-vscode?track=high" property="og:url" />
+    
+    <meta content="NextWork" property="og:site_name" />
+    <meta property="og:locale" content="en_US" />
+
+    
+    
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"LearningResource","about":"\u003ca target=\"_blank\" href=\"https://www.youtube.com/watch?v=_zbgMVE-gXI\"\u003eAmazon EC2\u003c/a\u003e","description":"Project 1 of the 6 Day DevOps Challenge - Kick off CI/CD pipeline with this foundational project!","educationalLevel":"Easy-ish","estimatedCost":"$0","inLanguage":"en-US","learningResourceType":["Tutorial","Hands-on Project"],"name":"Set Up a Web App in the Cloud","provider":{"@type":"Organization","name":"NextWork"},"teaches":"Project 1 of the 6 Day DevOps Challenge - Kick off CI/CD pipeline with this foundational project!","timeRequired":"PT120M","tool":["\u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-account-setup?utm_source=project-app\\\"\u003eSet Up An AWS Account for Free\u003c/a\u003e\u003c/u\u003e","Part 1: You are here!","Part 2: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-devops-github?utm_source=project-app\"\u003eConnect a GitHub Repo with AWS\u003c/a\u003e\u003c/u\u003e","Part 3: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-devops-codeartifact-updated?utm_source=project-app\"\u003eStore Dependencies in CodeArtifact\u003c/a\u003e\u003c/u\u003e","Part 4: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-devops-codebuild-updated?utm_source=project-app\"\u003ePackage an App with CodeBuild\u003c/a\u003e\u003c/u\u003e","Part 5: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-devops-codedeploy-updated?utm_source=project-app\"\u003eDeploy an App with CodeDeploy\u003c/a\u003e\u003c/u\u003e","Part 6: \u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-devops-codepipeline-updated?utm_source=project-app\"\u003eCI/CD with CodePipeline\u003c/a\u003e\u003c/u\u003e"],"url":"https://learn.nextwork.org/projects/aws-devops-vscode?track=high"}
+    </script>
+    
+
+    <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+    <link rel="icon" href="/static/favicon.svg?v=2" type="image/svg+xml" />
+
+    
+    <link
+      rel="preload"
+      href="/static/fonts/fk-grotesk-neue/woff2/FKGroteskNeue-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/fk-grotesk-neue/woff2/FKGroteskNeue-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/suisse-neue/woff2/SuisseNeue-Regular-WebS.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/suisse-neue/woff2/SuisseNeue-Medium-WebS.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    
+	<link rel="stylesheet" href="/static/assets/entry-47669cd6.css">
+	<script type="module" src="/static/assets/entry-8cf81344.js"></script>
+	<link rel="modulepreload" href="/static/assets/entry-8cf81344.js"><link rel="modulepreload" href="/static/assets/chunk-bd50b88a.js"><link rel="modulepreload" href="/static/assets/document_components-b35a0cd8.js">
+
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overscroll-behavior: none;
+        background-color: #f8f5f1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script id="nw-bootstrap">
+      window.__PRELOADED_STATE__ = "eyJ1c2VyIjp7ImVtYWlsIjoibmlnZWwuY2hpdGFwaUBnbWFpbC5jb20iLCJleHAiOjE3NjQ3MTA3MDAsImlkIjoic3dBeUxWQmd0QW9EOHZlNzRyS2EiLCJuYW1lIjoiVGF3YW5kYSBOaWdlbCBDaGl0YXBpIiwibmlja25hbWUiOiJoZWFydGZlbHRfY3lhbl9nbGFtb3JvdXNfbWVkbGFyIiwicGljdHVyZSI6Ii9oZWFydGZlbHRfY3lhbl9nbGFtb3JvdXNfbWVkbGFyL3VwbG9hZHMvcHJvZmlsZV9waWN0dXJlX2U2Zjg3ZTAwLTQ4NDgtNDk2NC1hYTYzLWQwYTJlNWFhMzI3YyIsInBsYW4iOiJmcmVlIiwidmFuaXR5U2x1ZyI6ImJ1aWxkLWEtdmlydHVhbC1wcml2YXRlLW5ldHdvcmsifSwicHJlZmVyZW5jZXMiOnsiY3VycmVudFByb2plY3QiOiJhd3MtZGV2b3BzLXZzY29kZSIsImRheXNQZXJXZWVrIjo1LCJkb2N1bWVudGF0aW9uVGhlbWUiOiJsaWdodCIsImhvdXJzUGVyRGF5IjoxLCJzZWxlY3RlZENhdGVnb3JpZXMiOm51bGx9LCJmZWF0dXJlcyI6eyJhcHAuYXBwX3ZlcnNpb25fcmVsb2FkaW5nIjp0cnVlLCJhcHAubWFuYWdlX3N1YnNjcmlwdGlvbl9wb3J0YWwiOnRydWUsImFwcC5wb3J0Zm9saW8iOnRydWUsImFwcC5yZW5kZXJfcmVhY3Rfc2hlbGwiOnRydWUsImdlbmVyYWwucHJvZCI6dHJ1ZSwicHJvamVjdHMuY2hhdF90b29sYmFyIjp0cnVlLCJwcm9qZWN0cy5jb3Vyc2VfdHJhY2siOnRydWUsInByb2plY3RzLmN1c3RvbV9sb2dpbiI6dHJ1ZSwicHJvamVjdHMuZWRpdG9yIjp0cnVlLCJwcm9qZWN0cy5oaWdobGlnaHRzIjp0cnVlLCJwcm9qZWN0cy5saXZlX2RvY3NfZHJhdyI6dHJ1ZSwicHJvamVjdHMubG9naW4iOnRydWUsInByb2plY3RzLm5hdlYyIjp0cnVlLCJwcm9qZWN0cy5wYXltZW50cyI6dHJ1ZSwicHJvamVjdHMucGRmX2Rvd25sb2FkaW5nIjp0cnVlLCJwcm9qZWN0cy5wcm9qZWN0X2luX3Byb2dyZXNzX3N0YXR1cyI6dHJ1ZSwicHJvamVjdHMuc2hhcmluZ1YyIjp0cnVlLCJwcm9qZWN0cy5zaW1wbGlmeSI6dHJ1ZX0sImFwcFNldHRpbmdzIjp7ImFwcFZlcnNpb24iOiIxLjAuMSJ9LCJsaW1pdHMiOnsicG9ydGZvbGlvRG9jdW1lbnQiOnsibGltaXQiOnsiZnJlZSI6MywicHJvIjoxMDAwMDAwfX0sInF1aXpDb21wbGV0aW9uIjp7ImN1cnJlbnQiOjMsImxpbWl0Ijp7ImZyZWUiOjUsInBybyI6MTAwMDAwMH19LCJ2YWxpZGF0aW9uVGV4dENoYXJhY3RlciI6eyJsaW1pdCI6eyJmcmVlIjoyNTAsInBybyI6MTAwMH19fSwicHJvamVjdCI6eyJjb21wbGV0ZWRCeSI6WyJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLZ3lUOXBfUV95eHZGZWpBeG5qYjVOS1Vrd3hBaEdBTFpGRXpyYmh5MHZLTW5CN1hLM2xBPXM5Ni1jIiwiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmFmZ0N3WGx5em05aFZUOWx5SC1lSnhneDk5c3ltakVBcHNjUkJKOW92dmJvUFRnPXM5Ni1jIiwiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmYwYjRVb3FxbU56aWN0a2c4M2lzV1ZRbFM3UE5LaVNTa3FrMjMzR0ZqZjZKdHA3NkpLQT1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0k5WkZGQUZ6SzY1OWNaUzIzVHloT0NEYTFKUDQyaUJPalFMOGtNMllfdzVyY1FHdz1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0kxNEp4LUVYck9YSGsxdWR6LV8wcmdDSHFwd3FZYURLYkswRmVuNy1CYnNvLTFRUT1zOTYtYyIsIi9lYXN5Z29pbmdfd2hpdGVfaGVyb2ljX2JpbGJlcnJ5L3VwbG9hZHMvcHJvZmlsZV9waWN0dXJlXzFlNGE5N2M5LTVlNTctNDlmMi1iZjM0LWE0NGY3NDIzZmQwYSIsImh0dHBzOi8vcy5ncmF2YXRhci5jb20vYXZhdGFyL2ViMDJlZGY5NTZlOThjZTU0ODVkOWRhMWMxNjg1NDUzP3M9NDgwXHUwMDI2cj1wZ1x1MDAyNmQ9aHR0cHMlM0ElMkYlMkZjZG4uYXV0aDAuY29tJTJGYXZhdGFycyUyRnBoLnBuZyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xka2hkZjRObDFvYzdiLTBFT3Rwb2hDaEs1NmZLbF9BUks1Tk5zdFUwa1VhVWFPUT1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0lLbm5lZmh1LTdNYUl1MnZIYzZEVEx1Q2Fmcmp5UElYZUZQTW1QWVlkbG92aEZ4Nms9czk2LWMiLCJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8yNjE5NTQxN2I0ZDEzNTM0ZDAzNDk3OTg0MTM0NzY2OD9zPTQ4MFx1MDAyNnI9cGdcdTAwMjZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZhci5wbmciXSwiY29tcGxldGlvbnMiOjEzMzcsImRvY1N0YXR1cyI6IkNSRUFURUQiLCJoYXNVcGRhdGVzIjpmYWxzZSwiaWQiOiJhd3MtZGV2b3BzLXZzY29kZSIsImxvY2tlZCI6dHJ1ZSwibWV0YWRhdGEiOnsiY2F0ZWdvcnkiOiI2IERheSBEZXZPcHMgQ2hhbGxlbmdlIiwiY29uY2VwdHMiOlsiXHUwMDNjYSB0YXJnZXQ9XCJfYmxhbmtcIiBocmVmPVwiaHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1femJnTVZFLWdYSVwiXHUwMDNlQW1hem9uIEVDMlx1MDAzYy9hXHUwMDNlIiwiXHUwMDNjYSB0YXJnZXQ9XCJfYmxhbmtcIiBocmVmPVwiaHR0cHM6Ly9jb2RlLnZpc3VhbHN0dWRpby5jb20vXCJcdTAwM2VWU0NvZGVcdTAwM2MvYVx1MDAzZSJdLCJjb3N0IjoiJDAiLCJkZXNjcmlwdGlvbiI6IlByb2plY3QgMSBvZiB0aGUgNiBEYXkgRGV2T3BzIENoYWxsZW5nZSAtIEtpY2sgb2ZmIENJL0NEIHBpcGVsaW5lIHdpdGggdGhpcyBmb3VuZGF0aW9uYWwgcHJvamVjdCEiLCJkaWZmaWN1bHR5IjoiRWFzeS1pc2giLCJmYWNlYm9va3RlbXBsYXRlIjoiSSd2ZSBiZWVuIGxlYXJuaW5nIGFib3V0IERldk9wcyBsYXRlbHksIGFuZCBJJ20gc28gZXhjaXRlZCB0byBzaGFyZSBzb21ldGhpbmcgSSBqdXN0IGJ1aWx0IVxuXG5JIHB1dCB0b2dldGhlciBhIHByb2plY3Qgd2hlcmUgSSBraWNrc3RhcnRlZCBhIEphdmEgd2ViIGFwcCBob3N0ZWQgb24gQVdTLiBUaGUgY29vbGVzdCBwYXJ0IHdhcyBkZWZpbml0ZWx5IGludGVncmF0aW5nIFZTQ29kZSBhbmQgRUMyIHRvIHNldCB1cCBhbiBJREUgZm9yIGEgdmlydHVhbCBtYWNoaW5lIVxuXG5DaGVjayBvdXQgbXkgd29yayBhdCBOZXh0V29yazpcbiNBV1MgI0Rldk9wcyAjQ2xvdWRDb21wdXRpbmciLCJpY29uIjoiL3Byb2plY3RzL3N0YXRpYy9hd3MtZGV2b3BzLXZzY29kZS9pY29uLnBuZyIsImluc3RhZ3JhbXRlbXBsYXRlIjoiRGF5IDEgb2YgdGhlIDYtZGF5IERldk9wcyBDaGFsbGVuZ2UgaXMgaW4gdGhlIGJvb2tzISBJIGp1c3QgbGF1bmNoZWQgYSBKYXZhIHdlYiBhcHAgaG9zdGVkIG9uIEFXUy5cblxuSSBidWlsdCBhIGJhc2ljIEphdmEgd2ViIGFwcCBhbmQgaG9zdGVkIGl0IG9uIGFuIEFXUyB2aXJ0dWFsIG1hY2hpbmUuXG5cbk15IGZhdm9yaXRlIHBhcnRzIHdlcmU6XG5cbi0gTGF1bmNoaW5nIGFuIEVDMiBpbnN0YW5jZS5cbi0gU2V0dGluZyB1cCBhIHJlbW90ZSBTU0ggY29ubmVjdGlvbiBmcm9tIFZTQ29kZSB0byBteSBFQzIgaW5zdGFuY2UuXG4tIEdlbmVyYXRpbmcgdGhlIGJhc2ljIHdlYiBhcHAgc3RydWN0dXJlIHdpdGggQXBhY2hlIE1hdmVuIGFuZCBKYXZhLlxuVGhlIGhpZ2hsaWdodCBmb3IgbWUgd2FzIGludGVncmF0aW5nIFZTQ29kZSBhbmQgRUMyIHRvIHNldCB1cCBhbiBJREUgZm9yIGEgdmlydHVhbCBtYWNoaW5lIVxuXG5UaGFua3MgQGl0c25leHR3b3JrIGZvciB0aGUgcHJvamVjdCBpZGVhIVxuXG5DaGVjayBvdXQgbXkgZG9jdW1lbnRhdGlvbiB0byBzZWUgaG93IEkgYnVpbHQgaXQ6XG5cbi4gLiAuXG4jQVdTICNEZXZPcHMgI0phdmEgI0Nsb3VkQ29tcHV0aW5nIiwibmVlZHMiOlsiXHUwMDNjdVx1MDAzZVx1MDAzY2EgdGFyZ2V0PVwiX2JsYW5rXCIgaHJlZj1cImh0dHBzOi8vbGVhcm4ubmV4dHdvcmsub3JnL3Byb2plY3RzL2F3cy1hY2NvdW50LXNldHVwP3V0bV9zb3VyY2U9cHJvamVjdC1hcHBcXFwiXHUwMDNlU2V0IFVwIEFuIEFXUyBBY2NvdW50IGZvciBGcmVlXHUwMDNjL2FcdTAwM2VcdTAwM2MvdVx1MDAzZSIsIlBhcnQgMTogWW91IGFyZSBoZXJlISIsIlBhcnQgMjogXHUwMDNjdVx1MDAzZVx1MDAzY2EgdGFyZ2V0PVwiX2JsYW5rXCIgaHJlZj1cImh0dHBzOi8vbGVhcm4ubmV4dHdvcmsub3JnL3Byb2plY3RzL2F3cy1kZXZvcHMtZ2l0aHViP3V0bV9zb3VyY2U9cHJvamVjdC1hcHBcIlx1MDAzZUNvbm5lY3QgYSBHaXRIdWIgUmVwbyB3aXRoIEFXU1x1MDAzYy9hXHUwMDNlXHUwMDNjL3VcdTAwM2UiLCJQYXJ0IDM6IFx1MDAzY3VcdTAwM2VcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL2xlYXJuLm5leHR3b3JrLm9yZy9wcm9qZWN0cy9hd3MtZGV2b3BzLWNvZGVhcnRpZmFjdC11cGRhdGVkP3V0bV9zb3VyY2U9cHJvamVjdC1hcHBcIlx1MDAzZVN0b3JlIERlcGVuZGVuY2llcyBpbiBDb2RlQXJ0aWZhY3RcdTAwM2MvYVx1MDAzZVx1MDAzYy91XHUwMDNlIiwiUGFydCA0OiBcdTAwM2N1XHUwMDNlXHUwMDNjYSB0YXJnZXQ9XCJfYmxhbmtcIiBocmVmPVwiaHR0cHM6Ly9sZWFybi5uZXh0d29yay5vcmcvcHJvamVjdHMvYXdzLWRldm9wcy1jb2RlYnVpbGQtdXBkYXRlZD91dG1fc291cmNlPXByb2plY3QtYXBwXCJcdTAwM2VQYWNrYWdlIGFuIEFwcCB3aXRoIENvZGVCdWlsZFx1MDAzYy9hXHUwMDNlXHUwMDNjL3VcdTAwM2UiLCJQYXJ0IDU6IFx1MDAzY3VcdTAwM2VcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL2xlYXJuLm5leHR3b3JrLm9yZy9wcm9qZWN0cy9hd3MtZGV2b3BzLWNvZGVkZXBsb3ktdXBkYXRlZD91dG1fc291cmNlPXByb2plY3QtYXBwXCJcdTAwM2VEZXBsb3kgYW4gQXBwIHdpdGggQ29kZURlcGxveVx1MDAzYy9hXHUwMDNlXHUwMDNjL3VcdTAwM2UiLCJQYXJ0IDY6IFx1MDAzY3VcdTAwM2VcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL2xlYXJuLm5leHR3b3JrLm9yZy9wcm9qZWN0cy9hd3MtZGV2b3BzLWNvZGVwaXBlbGluZS11cGRhdGVkP3V0bV9zb3VyY2U9cHJvamVjdC1hcHBcIlx1MDAzZUNJL0NEIHdpdGggQ29kZVBpcGVsaW5lXHUwMDNjL2FcdTAwM2VcdTAwM2MvdVx1MDAzZSJdLCJvcmRlciI6IjAuMiIsInBhcnQiOjEsInBsYW4iOiJmcmVlIiwic2hhcmV0ZW1wbGF0ZSI6IldvdywgdGhhdCdzIERheSAjMSBvZiB0aGUgNiBEYXkgRGV2T3BzIENoYWxsZW5nZSBkb25lLiBJIGp1c3Qga2lja3N0YXJ0ZWQgYSBKYXZhIHdlYiBhcHAgaG9zdGVkIG9uIEFXUyDwn5qAXG5cbkhlcmUncyB3aGF0IEkgZGlkOlxu4pyFIExhdW5jaGVkIGFuIEVDMiBpbnN0YW5jZS5cbuKchSBVc2VkIFZTQ29kZSB0byBzZXQgdXAgYSByZW1vdGUgU1NIIGNvbm5lY3Rpb24gdG8gbXkgRUMyIGluc3RhbmNlLlxu4pyFIFVzZWQgQXBhY2hlIE1hdmVuIGFuZCBKYXZhIHRvIGdlbmVyYXRlIGEgYmFzaWMgd2ViIGFwcCBzdHJ1Y3R1cmUuXG5cblRoZSBoaWdobGlnaHQgZm9yIG1lIHdhcyBpbnRlZ3JhdGluZyBWU0NvZGUgYW5kIEVDMiB0byBzZXQgdXAgYW4gSURFIGZvciBhIHZpcnR1YWwgbWFjaGluZSEgQ2hlY2sgb3V0IG15IGRvY3VtZW50YXRpb24gYmVsb3cgdG8gbGVhcm4gaG93IHlvdSBjYW4gZG8gdGhpcyB0b28uXG5cbvCfmY8gSHVnZSB0aGFua3MgdG8gQE5leHRXb3JrIGZvciB0aGVpciBndWlkZXMgYW5kIHRoZSA2IERheSBEZXZPcHMgQ2hhbGxlbmdlLiAuXG5cbvCflKUgS2VlcCBtZSBhY2NvdW50YWJsZSEgTXkgbmV4dCBwb3N0IHdpbGwgYmUgYWJvdXQgRGF5ICMyIG9mIHRoZSA2IERheSBEZXZPcHMgQ2hhbGxlbmdlLCB3aGVyZSBJJ2xsIGNvbm5lY3QgR2l0SHViIHdpdGggbXkgQVdTIGFyY2hpdGVjdHVyZS5cbiNBV1MgI0Nsb3VkQ29tcHV0aW5nICNEZXZPcHMgI1dlYkRldmVsb3BtZW50ICNKYXZhICNNYXZlbiAjVlNDb2RlICM2RGF5RGV2T3BzQ2hhbGxlbmdlICNOZXh0V29yayIsInRpbWUiOiIxMjAgbWlucyIsInRpdGxlIjoiU2V0IFVwIGEgV2ViIEFwcCBpbiB0aGUgQ2xvdWQiLCJ0cmFja3MiOlt7ImRlc2NyaXB0aW9uIjoiWW91J3JlIG9uIHlvdXIgb3duISBHcmVhdCBmb3IgdGhvc2Ugd2hvIHdhbnQgdG8gZGl2ZSBpbiBoZWFkZmlyc3QuIiwiaWQiOiJubyIsInRpdGxlIjoiT24gWW91ciBPd24ifSx7ImRlc2NyaXB0aW9uIjoiTGVhdmVzIG1vc3Qgb2YgaXQgdXAgdG8geW91LiBHcmVhdCBmb3IgdGhvc2UgbG9va2luZyBmb3IgYSBjaGFsbGVuZ2UuIiwiaWQiOiJsb3ciLCJ0aXRsZSI6IlNvbWUgR3VpZGFuY2UifSx7ImRlc2NyaXB0aW9uIjoiR2l2ZXMgc3RlcC1ieS1zdGVwIGluc3RydWN0aW9ucyBmb3IgZXZlcnkgcGFydC4gR3JlYXQgZm9yIGJlZ2lubmVycyEiLCJpZCI6ImhpZ2giLCJ0aXRsZSI6IlN0ZXAtYnktU3RlcCBHdWlkYW5jZSJ9XSwidHdpdHRlcnRlbXBsYXRlIjoiSnVzdCBjb21wbGV0ZWQgYSBuZXcgcHJvamVjdCEgSSBidWlsdCBhIEphdmEgd2ViIGFwcC5cblxuSXQgd2FzIGEgZ3JlYXQgZXhwZXJpZW5jZS4gSGVyZeKAmXMgYSBxdWljayBsb29rIGF0IGhvdyBJIGRpZCBpdDpcblxuLSBMYXVuY2hlZCBhbiBFQzIgaW5zdGFuY2Vcbi0gQ29ubmVjdGVkIFZTQ29kZSB0byB0aGUgaW5zdGFuY2UgdmlhIFNTSFxuLSBHZW5lcmF0ZWQgdGhlIGFwcCBzdHJ1Y3R1cmUgd2l0aCBNYXZlbiBhbmQgSmF2YVxuXG7wn5GHIENoZWNrIG91dCBteSBzdGVwLWJ5LXN0ZXAgcHJvY2VzcyBoZXJlOlxuI0Rldk9wcyAjQVdTICNKYXZhIiwidmlzaWJpbGl0eSI6InB1YmxpYyJ9LCJwcm9ncmVzcyI6MTAwLCJzdGF0dXMiOiJDT01QTEVURSIsInZhcmlhYmxlcyI6W3sibmFtZSI6IllPVVJJUEROUyJ9LHsibmFtZSI6IllPVVJVU0VSTkFNRSJ9LHsibmFtZSI6IllPVVJOQU1FIn0seyJuYW1lIjoiUEVNUEFUSCJ9XX19";
+      window.project = "{\"completedBy\":[\"https://lh3.googleusercontent.com/a/ACg8ocKgyT9p_Q_yxvFejAxnjb5NKUkwxAhGALZFEzrbhy0vKMnB7XK3lA=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocJafgCwXlyzm9hVT9lyH-eJxgx99symjEApscRBJ9ovvboPTg=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocJf0b4UoqqmNzictkg83isWVQlS7PNKiSSkqk233GFjf6Jtp76JKA=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocI9ZFFAFzK659cZS23TyhOCDa1JP42iBOjQL8kM2Y_w5rcQGw=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocI14Jx-EXrOXHk1udz-_0rgCHqpwqYaDKbK0Fen7-Bbso-1QQ=s96-c\",\"/easygoing_white_heroic_bilberry/uploads/profile_picture_1e4a97c9-5e57-49f2-bf34-a44f7423fd0a\",\"https://s.gravatar.com/avatar/eb02edf956e98ce5485d9da1c1685453?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fph.png\",\"https://lh3.googleusercontent.com/a/ACg8ocLdkhdf4Nl1oc7b-0EOtpohChK56fKl_ARK5NNstU0kUaUaOQ=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocIKnnefhu-7MaIu2vHc6DTLuCafrjyPIXeFPMmPYYdlovhFx6k=s96-c\",\"https://s.gravatar.com/avatar/26195417b4d13534d034979841347668?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Far.png\"],\"completions\":1337,\"docStatus\":\"CREATED\",\"hasUpdates\":false,\"id\":\"aws-devops-vscode\",\"locked\":true,\"metadata\":{\"category\":\"6 Day DevOps Challenge\",\"concepts\":[\"\\u003ca target=\\\"_blank\\\" href=\\\"https://www.youtube.com/watch?v=_zbgMVE-gXI\\\"\\u003eAmazon EC2\\u003c/a\\u003e\",\"\\u003ca target=\\\"_blank\\\" href=\\\"https://code.visualstudio.com/\\\"\\u003eVSCode\\u003c/a\\u003e\"],\"cost\":\"$0\",\"description\":\"Project 1 of the 6 Day DevOps Challenge - Kick off CI/CD pipeline with this foundational project!\",\"difficulty\":\"Easy-ish\",\"facebooktemplate\":\"I've been learning about DevOps lately, and I'm so excited to share something I just built!\\n\\nI put together a project where I kickstarted a Java web app hosted on AWS. The coolest part was definitely integrating VSCode and EC2 to set up an IDE for a virtual machine!\\n\\nCheck out my work at NextWork:\\n#AWS #DevOps #CloudComputing\",\"icon\":\"/projects/static/aws-devops-vscode/icon.png\",\"instagramtemplate\":\"Day 1 of the 6-day DevOps Challenge is in the books! I just launched a Java web app hosted on AWS.\\n\\nI built a basic Java web app and hosted it on an AWS virtual machine.\\n\\nMy favorite parts were:\\n\\n- Launching an EC2 instance.\\n- Setting up a remote SSH connection from VSCode to my EC2 instance.\\n- Generating the basic web app structure with Apache Maven and Java.\\nThe highlight for me was integrating VSCode and EC2 to set up an IDE for a virtual machine!\\n\\nThanks @itsnextwork for the project idea!\\n\\nCheck out my documentation to see how I built it:\\n\\n. . .\\n#AWS #DevOps #Java #CloudComputing\",\"needs\":[\"\\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-account-setup?utm_source=project-app\\\\\\\"\\u003eSet Up An AWS Account for Free\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 1: You are here!\",\"Part 2: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-devops-github?utm_source=project-app\\\"\\u003eConnect a GitHub Repo with AWS\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 3: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-devops-codeartifact-updated?utm_source=project-app\\\"\\u003eStore Dependencies in CodeArtifact\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 4: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-devops-codebuild-updated?utm_source=project-app\\\"\\u003ePackage an App with CodeBuild\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 5: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-devops-codedeploy-updated?utm_source=project-app\\\"\\u003eDeploy an App with CodeDeploy\\u003c/a\\u003e\\u003c/u\\u003e\",\"Part 6: \\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-devops-codepipeline-updated?utm_source=project-app\\\"\\u003eCI/CD with CodePipeline\\u003c/a\\u003e\\u003c/u\\u003e\"],\"order\":\"0.2\",\"part\":1,\"plan\":\"free\",\"sharetemplate\":\"Wow, that's Day #1 of the 6 Day DevOps Challenge done. I just kickstarted a Java web app hosted on AWS 🚀\\n\\nHere's what I did:\\n✅ Launched an EC2 instance.\\n✅ Used VSCode to set up a remote SSH connection to my EC2 instance.\\n✅ Used Apache Maven and Java to generate a basic web app structure.\\n\\nThe highlight for me was integrating VSCode and EC2 to set up an IDE for a virtual machine! Check out my documentation below to learn how you can do this too.\\n\\n🙏 Huge thanks to @NextWork for their guides and the 6 Day DevOps Challenge. .\\n\\n🔥 Keep me accountable! My next post will be about Day #2 of the 6 Day DevOps Challenge, where I'll connect GitHub with my AWS architecture.\\n#AWS #CloudComputing #DevOps #WebDevelopment #Java #Maven #VSCode #6DayDevOpsChallenge #NextWork\",\"time\":\"120 mins\",\"title\":\"Set Up a Web App in the Cloud\",\"tracks\":[{\"description\":\"You're on your own! Great for those who want to dive in headfirst.\",\"id\":\"no\",\"title\":\"On Your Own\"},{\"description\":\"Leaves most of it up to you. Great for those looking for a challenge.\",\"id\":\"low\",\"title\":\"Some Guidance\"},{\"description\":\"Gives step-by-step instructions for every part. Great for beginners!\",\"id\":\"high\",\"title\":\"Step-by-Step Guidance\"}],\"twittertemplate\":\"Just completed a new project! I built a Java web app.\\n\\nIt was a great experience. Here’s a quick look at how I did it:\\n\\n- Launched an EC2 instance\\n- Connected VSCode to the instance via SSH\\n- Generated the app structure with Maven and Java\\n\\n👇 Check out my step-by-step process here:\\n#DevOps #AWS #Java\",\"visibility\":\"public\"},\"progress\":100,\"status\":\"COMPLETE\",\"variables\":[{\"name\":\"YOURIPDNS\",\"value\":\"\"},{\"name\":\"YOURUSERNAME\",\"value\":\"\"},{\"name\":\"YOURNAME\",\"value\":\"tawanda\"},{\"name\":\"PEMPATH\",\"value\":\"\"}]}";
+    </script>
+
+    
+    <script
+      async
+      src="https://js.sentry-cdn.com/149a6bc4cd616ff81bea862cf35e71eb.min.js"
+      data-lazy="no"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.sentryOnLoad = function () {
+        window.Sentry.init({
+          environment: "prod",
+        });
+      };
+    </script>
+    <script async>
+      window.addEventListener("DOMContentLoaded", function () {
+        !(function (t, e) {
+          var o, n, p, r;
+          e.__SV ||
+            ((window.posthog = e),
+            (e._i = []),
+            (e.init = function (i, s, a) {
+              function g(t, e) {
+                var o = e.split(".");
+                2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                  (t[e] = function () {
+                    t.push(
+                      [e].concat(Array.prototype.slice.call(arguments, 0))
+                    );
+                  });
+              }
+              ((p = t.createElement("script")).type = "text/javascript"),
+                (p.crossOrigin = "anonymous"),
+                (p.async = !0),
+                (p.src =
+                  s.api_host.replace(
+                    ".i.posthog.com",
+                    "-assets.i.posthog.com"
+                  ) + "/static/array.js"),
+                (r =
+                  t.getElementsByTagName("script")[0]).parentNode.insertBefore(
+                  p,
+                  r
+                );
+              var u = e;
+              for (
+                void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                  u.people = u.people || [],
+                  u.toString = function (t) {
+                    var e = "posthog";
+                    return (
+                      "posthog" !== a && (e += "." + a),
+                      t || (e += " (stub)"),
+                      e
+                    );
+                  },
+                  u.people.toString = function () {
+                    return u.toString(1) + ".people (stub)";
+                  },
+                  o =
+                    "init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(
+                      " "
+                    ),
+                  n = 0;
+                n < o.length;
+                n++
+              )
+                g(u, o[n]);
+              e._i.push([i, s, a]);
+            }),
+            (e.__SV = 1));
+        })(document, window.posthog || []);
+        window.posthog.init("phc_4MP1TVN8zO0ATelTlIkH8gy25NVh9BiMRqFNrLtO86k", {
+          api_host: "https://us.i.posthog.com",
+          defaults: "2025-05-24",
+          person_profiles: "always",
+        });
+      });
+    </script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-P3ZJGC0XCG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-P3ZJGC0XCG", {
+        linker: {
+          domains: [
+            "learn.nextwork.org",
+            "community.nextwork.org",
+            "www.nextwork.org",
+            "nextwork.org",
+          ],
+        },
+      });
+    </script>
+    
+
+    <div id="app"></div>
+
+    
+
+    <noscript>
+      <style>
+        .no-js-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          font-family: system-ui, sans-serif;
+          padding: 3rem 1rem;
+        }
+
+        .no-js-logo {
+          position: absolute;
+          top: 1rem;
+          left: 1rem;
+          padding: 0.5rem;
+          background: white;
+          border-radius: 0.75rem;
+        }
+
+        .no-js-container {
+          padding-bottom: 10rem;
+          max-width: 36rem;
+          width: 100%;
+          text-align: left;
+          color: #1f2937;
+        }
+
+        .no-js-badge {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          border: 1px solid #d1d5db;
+          border-radius: 0.5rem;
+          width: fit-content;
+          padding: 0.25rem 0.625rem;
+          margin-bottom: 1rem;
+        }
+
+        .no-js-badge-dot {
+          background: #1b1918;
+          width: 0.5rem;
+          height: 0.5rem;
+          border-radius: 50%;
+        }
+
+        .no-js-badge-text {
+          font-size: 0.875rem;
+          color: #374151;
+        }
+
+        .no-js-heading {
+          font-size: 3.75rem;
+          font-weight: 600;
+          line-height: 1;
+          margin: 1.5rem 0;
+          color: #111827;
+        }
+
+        .no-js-description {
+          font-size: 1.25rem;
+          color: #6b7280;
+          line-height: 1.6;
+          margin: 0;
+          width: 80%;
+        }
+
+        .no-js-shield {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+
+        .no-js-logo-image {
+          width: 2rem;
+          height: 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .no-js-heading {
+            font-size: 2.5rem;
+          }
+
+          .no-js-description {
+            font-size: 1.125rem;
+            width: 100%;
+          }
+
+          .no-js-container {
+            padding: 0 1rem;
+          }
+        }
+      </style>
+      <div class="no-js-overlay">
+        <div class="no-js-logo">
+          <img
+            src="/static/nextwork-icon-back.svg"
+            alt="NextWork logo"
+            class="no-js-logo-image"
+          />
+        </div>
+        <div class="no-js-container">
+          <img
+            src="/static/shield-zap.svg"
+            alt="Shield with zap icon"
+            class="no-js-shield"
+          />
+          <h1 class="no-js-heading">JavaScript is required, whaaaaaaat!</h1>
+          <p class="no-js-description">
+            NextWork requires JavaScript to function properly. Please enable
+            JavaScript or disable any script-blocking tools like Brave Shields
+            to use this site.
+          </p>
+        </div>
+      </div>
+    </noscript>
+  </body>
+</html>

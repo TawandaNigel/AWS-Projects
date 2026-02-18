@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+     
+    <title>NextWork - Cloud Security with AWS IAM</title>
+    <meta content="Let&#39;s use IAM to control access to our AWS resources." name="description" />
+    <meta
+      content="NextWork - Cloud Security with AWS IAM"
+      property="og:title"
+    />
+    <meta
+      content="Let&#39;s use IAM to control access to our AWS resources."
+      property="og:description"
+    />
+    <meta
+      content="NextWork - Cloud Security with AWS IAM"
+      property="twitter:title"
+    />
+    <meta
+      content="Let&#39;s use IAM to control access to our AWS resources."
+      property="twitter:description"
+    />
+    
+    <meta content="/static/og-project.png" property="og:image" />
+    <meta content="/static/og-project.png" property="twitter:image" />
+    
+    <meta property="og:type" content="website" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    
+    <link rel="canonical" href="https://learn.nextwork.org/projects/aws-security-iam?track=high" />
+     
+    <meta content="https://learn.nextwork.org/projects/aws-security-iam?track=high" property="og:url" />
+    
+    <meta content="NextWork" property="og:site_name" />
+    <meta property="og:locale" content="en_US" />
+
+    
+    
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"LearningResource","about":"\u003ca target=\"_blank\" href=\"https://www.youtube.com/watch?v=fU4ZYdG8htQ\"\u003eAWS IAM\u003c/a\u003e","description":"Let's use IAM to control access to our AWS resources.","educationalLevel":"Easy peasy","estimatedCost":"$0","inLanguage":"en-US","learningResourceType":["Tutorial","Hands-on Project"],"name":"Cloud Security with AWS IAM","provider":{"@type":"Organization","name":"NextWork"},"teaches":"Let's use IAM to control access to our AWS resources.","timeRequired":"PT1H","tool":["\u003cu\u003e\u003ca target=\"_blank\" href=\"https://learn.nextwork.org/projects/aws-account-setup?utm_source=project-app\\\"\u003eSet Up An AWS Account for Free\u003c/a\u003e\u003c/u\u003e"],"url":"https://learn.nextwork.org/projects/aws-security-iam?track=high"}
+    </script>
+    
+
+    <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+    <link rel="icon" href="/static/favicon.svg?v=2" type="image/svg+xml" />
+
+    
+    <link
+      rel="preload"
+      href="/static/fonts/fk-grotesk-neue/woff2/FKGroteskNeue-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/fk-grotesk-neue/woff2/FKGroteskNeue-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/suisse-neue/woff2/SuisseNeue-Regular-WebS.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/suisse-neue/woff2/SuisseNeue-Medium-WebS.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    
+	<link rel="stylesheet" href="/static/assets/entry-47669cd6.css">
+	<script type="module" src="/static/assets/entry-8cf81344.js"></script>
+	<link rel="modulepreload" href="/static/assets/entry-8cf81344.js"><link rel="modulepreload" href="/static/assets/chunk-bd50b88a.js"><link rel="modulepreload" href="/static/assets/document_components-b35a0cd8.js">
+
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overscroll-behavior: none;
+        background-color: #f8f5f1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script id="nw-bootstrap">
+      window.__PRELOADED_STATE__ = "eyJ1c2VyIjp7ImVtYWlsIjoibmlnZWwuY2hpdGFwaUBnbWFpbC5jb20iLCJleHAiOjE3NjQ3MTA3MDAsImlkIjoic3dBeUxWQmd0QW9EOHZlNzRyS2EiLCJuYW1lIjoiVGF3YW5kYSBOaWdlbCBDaGl0YXBpIiwibmlja25hbWUiOiJoZWFydGZlbHRfY3lhbl9nbGFtb3JvdXNfbWVkbGFyIiwicGljdHVyZSI6Ii9oZWFydGZlbHRfY3lhbl9nbGFtb3JvdXNfbWVkbGFyL3VwbG9hZHMvcHJvZmlsZV9waWN0dXJlX2U2Zjg3ZTAwLTQ4NDgtNDk2NC1hYTYzLWQwYTJlNWFhMzI3YyIsInBsYW4iOiJmcmVlIiwidmFuaXR5U2x1ZyI6ImJ1aWxkLWEtdmlydHVhbC1wcml2YXRlLW5ldHdvcmsifSwicHJlZmVyZW5jZXMiOnsiY3VycmVudFByb2plY3QiOiJhd3Mtc2VjdXJpdHktaWFtIiwiZGF5c1BlcldlZWsiOjUsImRvY3VtZW50YXRpb25UaGVtZSI6ImxpZ2h0IiwiaG91cnNQZXJEYXkiOjEsInNlbGVjdGVkQ2F0ZWdvcmllcyI6bnVsbH0sImZlYXR1cmVzIjp7ImFwcC5hcHBfdmVyc2lvbl9yZWxvYWRpbmciOnRydWUsImFwcC5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BvcnRhbCI6dHJ1ZSwiYXBwLnBvcnRmb2xpbyI6dHJ1ZSwiYXBwLnJlbmRlcl9yZWFjdF9zaGVsbCI6dHJ1ZSwiZ2VuZXJhbC5wcm9kIjp0cnVlLCJwcm9qZWN0cy5jaGF0X3Rvb2xiYXIiOnRydWUsInByb2plY3RzLmNvdXJzZV90cmFjayI6dHJ1ZSwicHJvamVjdHMuY3VzdG9tX2xvZ2luIjp0cnVlLCJwcm9qZWN0cy5lZGl0b3IiOnRydWUsInByb2plY3RzLmhpZ2hsaWdodHMiOnRydWUsInByb2plY3RzLmxpdmVfZG9jc19kcmF3Ijp0cnVlLCJwcm9qZWN0cy5sb2dpbiI6dHJ1ZSwicHJvamVjdHMubmF2VjIiOnRydWUsInByb2plY3RzLnBheW1lbnRzIjp0cnVlLCJwcm9qZWN0cy5wZGZfZG93bmxvYWRpbmciOnRydWUsInByb2plY3RzLnByb2plY3RfaW5fcHJvZ3Jlc3Nfc3RhdHVzIjp0cnVlLCJwcm9qZWN0cy5zaGFyaW5nVjIiOnRydWUsInByb2plY3RzLnNpbXBsaWZ5Ijp0cnVlfSwiYXBwU2V0dGluZ3MiOnsiYXBwVmVyc2lvbiI6IjEuMC4xIn0sImxpbWl0cyI6eyJwb3J0Zm9saW9Eb2N1bWVudCI6eyJsaW1pdCI6eyJmcmVlIjozLCJwcm8iOjEwMDAwMDB9fSwicXVpekNvbXBsZXRpb24iOnsiY3VycmVudCI6MywibGltaXQiOnsiZnJlZSI6NSwicHJvIjoxMDAwMDAwfX0sInZhbGlkYXRpb25UZXh0Q2hhcmFjdGVyIjp7ImxpbWl0Ijp7ImZyZWUiOjI1MCwicHJvIjoxMDAwfX19LCJwcm9qZWN0Ijp7ImNvbXBsZXRlZEJ5IjpbImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0pVdjExZEpGaURGOHRvTzVncmswRUprRFB0N2NyNDNvUm0wTFpsbTB2XzVobzBKdDA9czk2LWMiLCJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLWmdsLVVPU3hSOEJNTGd2Sk1aU2xSNE9FVmpOd3hHei1kbmh1ZWx1RThOVVBrOGViRT1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0xDUlU1U0JuUlBOaWg0U3dRQzFHd0p6RHVDXzk2SDRXYWtkNTU4cHRseHgxb1NCZVJvPXM5Ni1jIiwiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSU1SRUpzN000bXZaSXZqNDF0eWRrOVRGc3VUcUhFRXRub2NoZVNFQmFPZXJabVdRPXM5Ni1jIiwiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJSVmNRODI4Y1NWUGdxMDMwOF9MYXVZLUdSOFdjN01wcHROQlZMbXNDdnpzbG9Kaz1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0ljV1lER1k0SUplSjFGakQ2U0ZHaE5fUlZkM25ZRmNOdXNZcUh4RHhkMWo3T2tqZz1zOTYtYyIsImh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0pmMGI0VW9xcW1OemljdGtnODNpc1dWUWxTN1BOS2lTU2txazIzM0dGamY2SnRwNzZKS0E9czk2LWMiLCJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci9iYjEzOGRhZjBlMWM4YzEwMTcwZDY2NzhmYWUzZjhiYz9zPTQ4MFx1MDAyNnI9cGdcdTAwMjZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZhYi5wbmciLCIvZWNzdGF0aWNfYW1iZXJfd2lzZV9hbGxpZ2F0b3IvdXBsb2Fkcy9wcm9maWxlX3BpY3R1cmVfM2M4ZWNkOTAtOTljYS00NmM5LWE1MWItNjU4YTQ4YTg0YWFiIiwiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvYmFmMzYzM2IxNDNjMjQzM2Q3OThkZDNjYTIzYjk5OWQ/cz00ODBcdTAwMjZyPXBnXHUwMDI2ZD1odHRwcyUzQSUyRiUyRmNkbi5hdXRoMC5jb20lMkZhdmF0YXJzJTJGcG8ucG5nIl0sImNvbXBsZXRpb25zIjoxNzIxLCJkb2NTdGF0dXMiOiJDUkVBVEVEIiwiaGFzVXBkYXRlcyI6ZmFsc2UsImlkIjoiYXdzLXNlY3VyaXR5LWlhbSIsImxvY2tlZCI6dHJ1ZSwibWV0YWRhdGEiOnsiY2F0ZWdvcnkiOiJDbG91ZCBCZWdpbm5lciBDaGFsbGVuZ2UiLCJjb25jZXB0cyI6WyJcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PWZVNFpZZEc4aHRRXCJcdTAwM2VBV1MgSUFNXHUwMDNjL2FcdTAwM2UiLCJcdTAwM2NhIHRhcmdldD1cIl9ibGFua1wiIGhyZWY9XCJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PV96YmdNVkUtZ1hJXCJcdTAwM2VBbWF6b24gRUMyXHUwMDNjL2FcdTAwM2UiXSwiY29zdCI6IiQwIiwiZGVzY3JpcHRpb24iOiJMZXQncyB1c2UgSUFNIHRvIGNvbnRyb2wgYWNjZXNzIHRvIG91ciBBV1MgcmVzb3VyY2VzLiIsImRpZmZpY3VsdHkiOiJFYXN5IHBlYXN5IiwiZmFjZWJvb2t0ZW1wbGF0ZSI6IkkndmUgYmVlbiBsZWFybmluZyBhYm91dCBjbG91ZCBzZWN1cml0eSBsYXRlbHksIGFuZCBJJ20gc28gZXhjaXRlZCB0byBzaGFyZSBzb21ldGhpbmcgSSBqdXN0IGJ1aWx0IVxuXG5JIHB1dCB0b2dldGhlciBhIHByb2plY3Qgd2hlcmUgSSB1c2VkIEFXUyBJQU0gdG8gZW5oYW5jZSBzZWN1cml0eSBpbiBteSBjbG91ZCBlbnZpcm9ubWVudC4gVGhlIGNvb2xlc3QgcGFydCB3YXMgZGVmaW5pdGVseSBsZWFybmluZyB0aGUgcHJhY3RpY2FsIHVzZSBjYXNlcyBmb3IgQVdTIElBTSwgbGlrZSBhdXRvbWF0aW5nIHBlcm1pc3Npb25zIGZvciBuZXcgam9pbmVycyBpbiBhIGNvbXBhbnkgb3IgY3VzdG9taXppbmcgYSBzaWduLWluIFVSTC5cblxuQ2hlY2sgb3V0IG15IHdvcmsgYXQgTmV4dFdvcms6XG4jQVdTICNJQU0gI0Nsb3VkU2VjdXJpdHkiLCJpY29uIjoiL3Byb2plY3RzL3N0YXRpYy9hd3Mtc2VjdXJpdHktaWFtL2ljb24ucG5nIiwiaW5zdGFncmFtdGVtcGxhdGUiOiJOZXcgcHJvamVjdCBkb25lISBKdXN0IGZpbmlzaGVkIGVuaGFuY2luZyBteSBjbG91ZCBzZWN1cml0eSB1c2luZyBBV1MgSUFNLlxuXG5JIGJ1aWx0IGEgc2VjdXJlIGNsb3VkIGVudmlyb25tZW50IGJ5IHNldHRpbmcgdXAgc3BlY2lmaWMgdXNlcnMgYW5kIGFjY2VzcyBjb250cm9scy5cblxuTXkgZmF2b3JpdGUgcGFydHMgd2VyZTpcblxuLSBMYXVuY2hpbmcgYW5kIG1hbmFnaW5nIEFtYXpvbiBFQzIgaW5zdGFuY2VzLlxuLSBDcmVhdGluZyBzZWN1cmUgYWNjZXNzIGNvbnRyb2xzIHdpdGggSUFNIFBvbGljaWVzLCBVc2VycywgYW5kIFVzZXIgR3JvdXBzLlxuLSBUZXN0aW5nIHRoZSBlZmZlY3RpdmVuZXNzIG9mIG15IHNldHRpbmdzIGJ5IGxvZ2dpbmcgaW4gYXMgYSBuZXcgdXNlci5cblxuSXQgd2FzIGV5ZS1vcGVuaW5nIHRvIHNlZSB0aGUgcmVhbC13b3JsZCBhcHBsaWNhdGlvbnMgb2YgSUFNLCBsaWtlIGF1dG9tYXRpbmcgcGVybWlzc2lvbnMgZm9yIG5ldyB0ZWFtIG1lbWJlcnMuIFdoYXQncyB5b3VyIGZhdm9yaXRlIEFXUyBzZWN1cml0eSBmZWF0dXJlP1xuXG5UaGFua3MgQGl0c25leHR3b3JrIGZvciB0aGUgcHJvamVjdCBpZGVhIVxuXG5DaGVjayBvdXQgbXkgZG9jdW1lbnRhdGlvbiB0byBzZWUgaG93IEkgYnVpbHQgaXQ6XG5cbi4gLiAuXG4jQVdTICNJQU0gI0Nsb3VkU2VjdXJpdHkgI0FXU1Byb2plY3RzIiwibmVlZHMiOlsiXHUwMDNjdVx1MDAzZVx1MDAzY2EgdGFyZ2V0PVwiX2JsYW5rXCIgaHJlZj1cImh0dHBzOi8vbGVhcm4ubmV4dHdvcmsub3JnL3Byb2plY3RzL2F3cy1hY2NvdW50LXNldHVwP3V0bV9zb3VyY2U9cHJvamVjdC1hcHBcXFwiXHUwMDNlU2V0IFVwIEFuIEFXUyBBY2NvdW50IGZvciBGcmVlXHUwMDNjL2FcdTAwM2VcdTAwM2MvdVx1MDAzZSJdLCJwYXJ0IjozLCJwbGFuIjoiZnJlZSIsInNoYXJldGVtcGxhdGUiOiLwn5SQIEhlcmUncyBob3cgSSB1c2VkIEFXUyBJQU0gdG8gZW5oYW5jZSBzZWN1cml0eSBpbiBteSBjbG91ZCBlbnZpcm9ubWVudCFcblxu8J+UjSBJbiB0aGlzIHByb2plY3QsIEkgbGVhcm5lZCBob3cgdG86XG7inIUgIExhdW5jaCBhbmQgbWFuYWdlIEFtYXpvbiBFQzIgaW5zdGFuY2VzIGZvciBwb3dlcmZ1bCwgc2NhbGFibGUgY29tcHV0aW5nLlxu4pyFICBEaXZlIGRlZXAgaW50byBBV1MgSUFNIHRvIGVuc3VyZSBzZWN1cmUgYW5kIHByZWNpc2UgYWNjZXNzIGNvbnRyb2xzIHdpdGggUG9saWNpZXMsIFVzZXJzIGFuZCBVc2VyIEdyb3Vwcy5cbuKchSAgVGVzdCB0aGUgZWZmZWN0aXZlbmVzcyBvZiBteSBzZXR0aW5ncyBieSBsb2dnaW5nIGludG8gbXkgb3duIEFXUyBhY2NvdW50IGFzIGEgbmV3IHVzZXIuXG5cbvCfjJ8gVGhlIHByb2plY3QncyBoaWdobGlnaHQgZm9yIG1lIHdhcyBrbm93aW5nIHRoZSBwcmFjdGljYWwgdXNlIGNhc2VzIGZvciBBV1MgSUFNLCBzdWNoIGFzIGF1dG9tYXRpbmcgcGVybWlzc2lvbnMgZm9yIG5ldyBqb2luZXJzIGluIGEgY29tcGFueSwgb3IgdXNpbmcgYW4gQWNjb3VudCBBbGlhcyB0byBjdXN0b21pc2UgdGhlaXIgc2lnbiBpbiBVUkwuXG5cbvCfk7ggIENoZWNrIG91dCBhIHN1bW1hcnkgb2YgbXkgbGVhcm5pbmdzIGFuZCBob3cgeW91IGNhbiBkbyB0aGlzIHRvbyBiZWxvdy5cblxu8J+ToiBJZiB5b3UncmUgaW4gdGhlIEFXUyBzcGFjZSBvciBsb3ZlIGNsb3VkIHNlY3VyaXR5IHRvbywgbGV0J3MgY29ubmVjdCFcblxu8J+ZjyBIdWdlIHRoYW5rcyB0byBATmV4dFdvcmsgZm9yIHRoZSBwcm9qZWN0IGd1aWRlLiBDaGVjayBvdXQgbXkgd29yayBhdCBOZXh0V29yazpcbiNBV1MgI0lBTSAjQ2xvdWRTZWN1cml0eSAjQVdTQmVnaW5uZXJzQ2hhbGxlbmdlICNOZXh0V29yayIsInRpbWUiOiIxIGhvdXIiLCJ0aXRsZSI6IkNsb3VkIFNlY3VyaXR5IHdpdGggQVdTIElBTSIsInRyYWNrcyI6W3siZGVzY3JpcHRpb24iOiJZb3UncmUgb24geW91ciBvd24hIEdyZWF0IGZvciB0aG9zZSB3aG8gd2FudCB0byBkaXZlIGluIGhlYWRmaXJzdC4iLCJpZCI6Im5vIiwidGl0bGUiOiJPbiBZb3VyIE93biJ9LHsiZGVzY3JpcHRpb24iOiJMZWF2ZXMgbW9zdCBvZiBpdCB1cCB0byB5b3UuIEdyZWF0IGZvciB0aG9zZSBsb29raW5nIGZvciBhIGNoYWxsZW5nZS4iLCJpZCI6ImxvdyIsInRpdGxlIjoiU29tZSBHdWlkYW5jZSJ9LHsiZGVzY3JpcHRpb24iOiJHaXZlcyBzdGVwLWJ5LXN0ZXAgaW5zdHJ1Y3Rpb25zIGZvciBldmVyeSBwYXJ0LiBHcmVhdCBmb3IgYmVnaW5uZXJzISIsImlkIjoiaGlnaCIsInRpdGxlIjoiU3RlcC1ieS1TdGVwIEd1aWRhbmNlIn1dLCJ0d2l0dGVydGVtcGxhdGUiOiJKdXN0IGNvbXBsZXRlZCBhIG5ldyBwcm9qZWN0ISBJIGJ1aWx0IGFuIEFXUyBJQU0gc2V0dXAuXG5cbkl0IHdhcyBhIGdyZWF0IGV4cGVyaWVuY2UuIEhlcmXigJlzIGEgcXVpY2sgbG9vayBhdCBob3cgSSBkaWQgaXQ6XG5cbi0gTGF1bmNoZWQgYW5kIG1hbmFnZWQgQW1hem9uIEVDMiBpbnN0YW5jZXNcbi0gVXNlZCBBV1MgSUFNIGZvciBzZWN1cmUgYWNjZXNzIGNvbnRyb2xzXG4tIFRlc3RlZCBzZXR0aW5ncyBieSBsb2dnaW5nIGluIGFzIGEgbmV3IHVzZXJcblxu8J+RhyBDaGVjayBvdXQgbXkgc3RlcC1ieS1zdGVwIHByb2Nlc3MgaGVyZTpcbiNBV1MgI0lBTSAjQ2xvdWRTZWN1cml0eSIsInZpc2liaWxpdHkiOiJwdWJsaWMifSwicHJvZ3Jlc3MiOjEwMCwic3RhdHVzIjoiQ09NUExFVEUiLCJ2YXJpYWJsZXMiOlt7Im5hbWUiOiJZT1VSTkFNRSJ9XX19";
+      window.project = "{\"completedBy\":[\"https://lh3.googleusercontent.com/a/ACg8ocJUv11dJFiDF8toO5grk0EJkDPt7cr43oRm0LZlm0v_5ho0Jt0=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocKZgl-UOSxR8BMLgvJMZSlR4OEVjNwxGz-dnhueluE8NUPk8ebE=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocLCRU5SBnRPNih4SwQC1GwJzDuC_96H4Wakd558ptlxx1oSBeRo=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocIMREJs7M4mvZIvj41tydk9TFsuTqHEEtnocheSEBaOerZmWQ=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocK2RVcQ828cSVPgq0308_LauY-GR8Wc7MpptNBVLmsCvzsloJk=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocIcWYDGY4IJeJ1FjD6SFGhN_RVd3nYFcNusYqHxDxd1j7Okjg=s96-c\",\"https://lh3.googleusercontent.com/a/ACg8ocJf0b4UoqqmNzictkg83isWVQlS7PNKiSSkqk233GFjf6Jtp76JKA=s96-c\",\"https://s.gravatar.com/avatar/bb138daf0e1c8c10170d6678fae3f8bc?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fab.png\",\"/ecstatic_amber_wise_alligator/uploads/profile_picture_3c8ecd90-99ca-46c9-a51b-658a48a84aab\",\"https://s.gravatar.com/avatar/baf3633b143c2433d798dd3ca23b999d?s=480\\u0026r=pg\\u0026d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fpo.png\"],\"completions\":1721,\"docStatus\":\"CREATED\",\"hasUpdates\":false,\"id\":\"aws-security-iam\",\"locked\":true,\"metadata\":{\"category\":\"Cloud Beginner Challenge\",\"concepts\":[\"\\u003ca target=\\\"_blank\\\" href=\\\"https://www.youtube.com/watch?v=fU4ZYdG8htQ\\\"\\u003eAWS IAM\\u003c/a\\u003e\",\"\\u003ca target=\\\"_blank\\\" href=\\\"https://www.youtube.com/watch?v=_zbgMVE-gXI\\\"\\u003eAmazon EC2\\u003c/a\\u003e\"],\"cost\":\"$0\",\"description\":\"Let's use IAM to control access to our AWS resources.\",\"difficulty\":\"Easy peasy\",\"facebooktemplate\":\"I've been learning about cloud security lately, and I'm so excited to share something I just built!\\n\\nI put together a project where I used AWS IAM to enhance security in my cloud environment. The coolest part was definitely learning the practical use cases for AWS IAM, like automating permissions for new joiners in a company or customizing a sign-in URL.\\n\\nCheck out my work at NextWork:\\n#AWS #IAM #CloudSecurity\",\"icon\":\"/projects/static/aws-security-iam/icon.png\",\"instagramtemplate\":\"New project done! Just finished enhancing my cloud security using AWS IAM.\\n\\nI built a secure cloud environment by setting up specific users and access controls.\\n\\nMy favorite parts were:\\n\\n- Launching and managing Amazon EC2 instances.\\n- Creating secure access controls with IAM Policies, Users, and User Groups.\\n- Testing the effectiveness of my settings by logging in as a new user.\\n\\nIt was eye-opening to see the real-world applications of IAM, like automating permissions for new team members. What's your favorite AWS security feature?\\n\\nThanks @itsnextwork for the project idea!\\n\\nCheck out my documentation to see how I built it:\\n\\n. . .\\n#AWS #IAM #CloudSecurity #AWSProjects\",\"needs\":[\"\\u003cu\\u003e\\u003ca target=\\\"_blank\\\" href=\\\"https://learn.nextwork.org/projects/aws-account-setup?utm_source=project-app\\\\\\\"\\u003eSet Up An AWS Account for Free\\u003c/a\\u003e\\u003c/u\\u003e\"],\"part\":3,\"plan\":\"free\",\"sharetemplate\":\"🔐 Here's how I used AWS IAM to enhance security in my cloud environment!\\n\\n🔍 In this project, I learned how to:\\n✅  Launch and manage Amazon EC2 instances for powerful, scalable computing.\\n✅  Dive deep into AWS IAM to ensure secure and precise access controls with Policies, Users and User Groups.\\n✅  Test the effectiveness of my settings by logging into my own AWS account as a new user.\\n\\n🌟 The project's highlight for me was knowing the practical use cases for AWS IAM, such as automating permissions for new joiners in a company, or using an Account Alias to customise their sign in URL.\\n\\n📸  Check out a summary of my learnings and how you can do this too below.\\n\\n📢 If you're in the AWS space or love cloud security too, let's connect!\\n\\n🙏 Huge thanks to @NextWork for the project guide. Check out my work at NextWork:\\n#AWS #IAM #CloudSecurity #AWSBeginnersChallenge #NextWork\",\"time\":\"1 hour\",\"title\":\"Cloud Security with AWS IAM\",\"tracks\":[{\"description\":\"You're on your own! Great for those who want to dive in headfirst.\",\"id\":\"no\",\"title\":\"On Your Own\"},{\"description\":\"Leaves most of it up to you. Great for those looking for a challenge.\",\"id\":\"low\",\"title\":\"Some Guidance\"},{\"description\":\"Gives step-by-step instructions for every part. Great for beginners!\",\"id\":\"high\",\"title\":\"Step-by-Step Guidance\"}],\"twittertemplate\":\"Just completed a new project! I built an AWS IAM setup.\\n\\nIt was a great experience. Here’s a quick look at how I did it:\\n\\n- Launched and managed Amazon EC2 instances\\n- Used AWS IAM for secure access controls\\n- Tested settings by logging in as a new user\\n\\n👇 Check out my step-by-step process here:\\n#AWS #IAM #CloudSecurity\",\"visibility\":\"public\"},\"progress\":100,\"status\":\"COMPLETE\",\"variables\":[{\"name\":\"YOURNAME\",\"value\":\"tawanda\"}]}";
+    </script>
+
+    
+    <script
+      async
+      src="https://js.sentry-cdn.com/149a6bc4cd616ff81bea862cf35e71eb.min.js"
+      data-lazy="no"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.sentryOnLoad = function () {
+        window.Sentry.init({
+          environment: "prod",
+        });
+      };
+    </script>
+    <script async>
+      window.addEventListener("DOMContentLoaded", function () {
+        !(function (t, e) {
+          var o, n, p, r;
+          e.__SV ||
+            ((window.posthog = e),
+            (e._i = []),
+            (e.init = function (i, s, a) {
+              function g(t, e) {
+                var o = e.split(".");
+                2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                  (t[e] = function () {
+                    t.push(
+                      [e].concat(Array.prototype.slice.call(arguments, 0))
+                    );
+                  });
+              }
+              ((p = t.createElement("script")).type = "text/javascript"),
+                (p.crossOrigin = "anonymous"),
+                (p.async = !0),
+                (p.src =
+                  s.api_host.replace(
+                    ".i.posthog.com",
+                    "-assets.i.posthog.com"
+                  ) + "/static/array.js"),
+                (r =
+                  t.getElementsByTagName("script")[0]).parentNode.insertBefore(
+                  p,
+                  r
+                );
+              var u = e;
+              for (
+                void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                  u.people = u.people || [],
+                  u.toString = function (t) {
+                    var e = "posthog";
+                    return (
+                      "posthog" !== a && (e += "." + a),
+                      t || (e += " (stub)"),
+                      e
+                    );
+                  },
+                  u.people.toString = function () {
+                    return u.toString(1) + ".people (stub)";
+                  },
+                  o =
+                    "init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(
+                      " "
+                    ),
+                  n = 0;
+                n < o.length;
+                n++
+              )
+                g(u, o[n]);
+              e._i.push([i, s, a]);
+            }),
+            (e.__SV = 1));
+        })(document, window.posthog || []);
+        window.posthog.init("phc_4MP1TVN8zO0ATelTlIkH8gy25NVh9BiMRqFNrLtO86k", {
+          api_host: "https://us.i.posthog.com",
+          defaults: "2025-05-24",
+          person_profiles: "always",
+        });
+      });
+    </script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-P3ZJGC0XCG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-P3ZJGC0XCG", {
+        linker: {
+          domains: [
+            "learn.nextwork.org",
+            "community.nextwork.org",
+            "www.nextwork.org",
+            "nextwork.org",
+          ],
+        },
+      });
+    </script>
+    
+
+    <div id="app"></div>
+
+    
+
+    <noscript>
+      <style>
+        .no-js-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          font-family: system-ui, sans-serif;
+          padding: 3rem 1rem;
+        }
+
+        .no-js-logo {
+          position: absolute;
+          top: 1rem;
+          left: 1rem;
+          padding: 0.5rem;
+          background: white;
+          border-radius: 0.75rem;
+        }
+
+        .no-js-container {
+          padding-bottom: 10rem;
+          max-width: 36rem;
+          width: 100%;
+          text-align: left;
+          color: #1f2937;
+        }
+
+        .no-js-badge {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          border: 1px solid #d1d5db;
+          border-radius: 0.5rem;
+          width: fit-content;
+          padding: 0.25rem 0.625rem;
+          margin-bottom: 1rem;
+        }
+
+        .no-js-badge-dot {
+          background: #1b1918;
+          width: 0.5rem;
+          height: 0.5rem;
+          border-radius: 50%;
+        }
+
+        .no-js-badge-text {
+          font-size: 0.875rem;
+          color: #374151;
+        }
+
+        .no-js-heading {
+          font-size: 3.75rem;
+          font-weight: 600;
+          line-height: 1;
+          margin: 1.5rem 0;
+          color: #111827;
+        }
+
+        .no-js-description {
+          font-size: 1.25rem;
+          color: #6b7280;
+          line-height: 1.6;
+          margin: 0;
+          width: 80%;
+        }
+
+        .no-js-shield {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+
+        .no-js-logo-image {
+          width: 2rem;
+          height: 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .no-js-heading {
+            font-size: 2.5rem;
+          }
+
+          .no-js-description {
+            font-size: 1.125rem;
+            width: 100%;
+          }
+
+          .no-js-container {
+            padding: 0 1rem;
+          }
+        }
+      </style>
+      <div class="no-js-overlay">
+        <div class="no-js-logo">
+          <img
+            src="/static/nextwork-icon-back.svg"
+            alt="NextWork logo"
+            class="no-js-logo-image"
+          />
+        </div>
+        <div class="no-js-container">
+          <img
+            src="/static/shield-zap.svg"
+            alt="Shield with zap icon"
+            class="no-js-shield"
+          />
+          <h1 class="no-js-heading">JavaScript is required, whaaaaaaat!</h1>
+          <p class="no-js-description">
+            NextWork requires JavaScript to function properly. Please enable
+            JavaScript or disable any script-blocking tools like Brave Shields
+            to use this site.
+          </p>
+        </div>
+      </div>
+    </noscript>
+  </body>
+</html>
